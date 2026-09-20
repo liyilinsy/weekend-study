@@ -101,7 +101,7 @@
   <p style="text-align:center; color:#9aa3b8; font-size:12.5px; margin-top:20px;">路上 10 分钟，思路链过一遍 · 到校即是复习 🚀</p>
 </div>
 
-<script src="data-current.js"></script>
+<script src="data-current.js?v=20260920b"></script>
 <script src="qrcode.min.js"></script>
 <script>
 (function(){
@@ -109,7 +109,7 @@
   document.getElementById('hero-sub').textContent =
     D.dateLabel.split('·')[0].trim() + ' 返校路上 · ' + D.scope.replace('本周：','');
 
-  var toc = '<a href="#next">▼ 下周</a><a href="#bedtime">🌙睡前</a>';
+  var toc = '<a href="#next">▼ 下周</a><a href="#bedtime">🌙睡前</a><a href="map.html">🗺地图</a>';
   D.questions.forEach(function(q, i){ toc += '<a href="#'+q.id+'">'+(i+1)+' '+(q.subject==='math'?'数':'物')+'</a>'; });
   document.getElementById('toc').innerHTML = toc;
 
