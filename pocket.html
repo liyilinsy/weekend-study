@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📖 随身查阅版 · 路上理思路</title>
+<style>
+  :root{ --ink:#2b2f3a; --sub:#6b7280; --line:#e5e7eb; --math:#4f7cff; --phys:#ff8a3d; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif; color:var(--ink); background:#faf9f6; line-height:1.8; font-size:16px;}
+  .wrap{max-width:680px; margin:0 auto; padding:0 14px 50px;}
+  header{background:linear-gradient(135deg,#22b573,#5bc98a); color:#fff; padding:22px 16px; text-align:center;}
+  header h1{font-size:21px;}
+  header p{font-size:13.5px; opacity:.95; margin-top:6px;}
+  .toc{margin:14px 0 4px; text-align:center; font-size:14px;}
+  .toc a{display:inline-block; margin:3px; padding:4px 12px; border-radius:16px; background:#fff; border:1px solid var(--line); color:var(--ink); text-decoration:none;}
+  .hint{margin-top:12px; background:#fffbe8; border:1px solid #f2e2a0; border-radius:10px; padding:8px 14px; font-size:14px;}
+  .card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-top:14px; border-top:3px solid var(--math); box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .card.phys{border-top-color:var(--phys);}
+  .card h3{font-size:16.5px; margin-bottom:8px;}
+  .card h3 .s{color:var(--math);}
+  .card.phys h3 .s{color:#d96a1e;}
+  .stem{font-size:15px; color:#3a3f4d; background:#f6f7fb; border-radius:8px; padding:8px 12px;}
+  .trig{margin-top:8px; font-size:13.5px; background:#eef6ff; border:1px solid #cfe4ff; border-radius:8px; padding:6px 10px; color:#2b6cb0;}
+  .trig b{color:#2b6cb0;}
+  .combo-line{margin-top:8px; font-size:13.5px; color:#8a6414; background:#fff7e8; border-radius:8px; padding:6px 10px;}
+  .chain{margin-top:10px; font-size:15px;}
+  .chain b{color:var(--math);}
+  .card.phys .chain b{color:#d96a1e;}
+  mark{background:#ffe97a; padding:0 3px; border-radius:3px; font-weight:700;}
+  .ans{margin-top:10px; background:#eaffea; border:2px solid #4ec47e; border-radius:10px; padding:8px 14px; font-size:16px; font-weight:700; color:#15693c;}
+  .memo{margin-top:8px; font-size:14px; color:#5b46b8;}
+  .fig{text-align:center; margin:10px 0;}
+  .fig svg{width:100%; height:auto; max-width:340px;}
+  .ncard{background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-top:14px; border-top:3px solid #22b573; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .ncard h3{font-size:16px; margin-bottom:6px;}
+  .ncard ul{padding-left:20px; font-size:14.5px;}
+  .ncard li{margin:3px 0;}
+  h2.sec{margin-top:26px; font-size:18px;}
+
+  /* 新题型破题卡 */
+  .nt{background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-top:14px; border-top:3px solid #8a6bff; box-shadow:0 1px 3px rgba(0,0,0,.05); break-inside:avoid;}
+  .nt h3{font-size:16px; margin-bottom:6px;}
+  .nt .row{font-size:14.5px; margin:5px 0;}
+  .nt .row b{color:#5b46b8;}
+  .nt-note{margin-top:14px; background:#f5f0ff; border:1px dashed #c8baff; border-radius:14px; padding:12px 16px; font-size:14px; color:#5b46b8;}
+
+  /* 睡前过电影 */
+  .quiz{background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-top:14px; break-inside:avoid;}
+  .quiz .qq{margin:10px 0;}
+  .quiz .qq .q{font-size:15px; font-weight:600;}
+  .quiz .qq .s{display:inline-block; font-size:12px; padding:1px 10px; border-radius:10px; background:#eef3ff; color:#4f7cff; margin-bottom:3px;}
+  .quiz details summary{cursor:pointer; font-size:13.5px; color:#1d8f5c; font-weight:600; list-style:none; user-select:none;}
+  .quiz details summary::-webkit-details-marker{display:none;}
+  .quiz details summary::before{content:"🌙 ";}
+  .quiz details p{margin-top:4px; font-size:14.5px; color:#15693c;}
+  svg text{font-family:"Microsoft YaHei",sans-serif;}
+
+  /* ---------- 响应式：pad 横竖 / 宽屏 / 带鱼屏 ---------- */
+  @media(min-width:768px){ body{font-size:17px;} .wrap{max-width:720px;} }
+  @media(min-width:1800px){
+    .wrap{max-width:1200px;}
+    #content{column-count:2; column-gap:18px;}
+    .card{break-inside:avoid; margin-top:0; margin-bottom:14px;}
+    h2.sec{column-span:all;}
+  }
+
+  .share-bar{margin-top:10px; text-align:center;}
+  .share-bar button{border:none; border-radius:20px; padding:6px 22px; background:#1d8f5c; color:#fff; font-size:14px; font-weight:600;}
+  .share-mask{display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:50; align-items:center; justify-content:center;}
+  .share-mask.show{display:flex;}
+  .share-box{background:#fff; border-radius:16px; padding:20px 24px; text-align:center; max-width:300px; width:88%;}
+  .share-box img{width:200px; height:200px; margin:8px auto; display:block;}
+  .share-box .url{font-size:12px; color:#6b7280; word-break:break-all; margin:6px 0;}
+  .share-box button{margin-top:10px; border:none; border-radius:20px; padding:8px 26px; background:#1d8f5c; color:#fff; font-size:14px; cursor:pointer;}
+  .share-box .close{margin-top:8px; font-size:12px; color:#6b7280; cursor:pointer;}
+</style>
+</head>
+<body>
+<header>
+  <h1>📖 随身查阅版 · 路上理思路</h1>
+  <p id="hero-sub"></p>
+</header>
+<div class="wrap">
+  <div class="hint">🚗 <b>看法：每题 1 分钟，只盯三件事</b>——①考什么模型 ②<mark>关键一步</mark>怎么想 ③答案长什么样。<b>计算不用动笔验</b>，思路通了到学校自然快。</div>
+  <nav class="toc" id="toc"></nav>
+  <div class="share-bar"><button id="btn-share" style="display:none;">📤 分享给微信 / QQ</button></div>
+  <div id="content"></div>
+
+  <div class="share-mask" id="share-mask">
+    <div class="share-box">
+      <div style="font-weight:700;">📤 分享给微信 / QQ</div>
+      <div style="font-size:13px; color:#6b7280;">对方扫码，或点下面复制链接去发送</div>
+      <img id="qr-fallback" style="display:none;" alt="二维码">
+      <div id="qr-img" style="width:200px;height:200px;margin:8px auto;"></div>
+      <div class="url" id="share-url"></div>
+      <button id="btn-copy">复制链接</button>
+      <div class="close" id="share-close">关闭</div>
+    </div>
+  </div>
+  <p style="text-align:center; color:#9aa3b8; font-size:12.5px; margin-top:20px;">路上 10 分钟，思路链过一遍 · 到校即是复习 🚀</p>
+</div>
+
+<script src="data-current.js"></script>
+<script src="qrcode.min.js"></script>
+<script>
+(function(){
+  var D = window.STUDY_WEEK;
+  document.getElementById('hero-sub').textContent =
+    D.dateLabel.split('·')[0].trim() + ' 返校路上 · ' + D.scope.replace('本周：','');
+
+  var toc = '<a href="#next">▼ 下周</a><a href="#bedtime">🌙睡前</a>';
+  D.questions.forEach(function(q, i){ toc += '<a href="#'+q.id+'">'+(i+1)+' '+(q.subject==='math'?'数':'物')+'</a>'; });
+  document.getElementById('toc').innerHTML = toc;
+
+  var h = '';
+  D.questions.forEach(function(q, i){
+    h += '<div class="card'+(q.subject==='phys'?' phys':'')+'" id="'+q.id+'">'+
+      '<h3><span class="s">'+(q.subject==='math'?'数学':'物理')+'</span> '+String(i+1).padStart(2,'0')+' '+q.shortTitle+'</h3>'+
+      (q.trigger ? '<div class="trig"><b>⚡ '+q.trigger+'</b> → 🚪 '+q.entry+'</div>' : '')+
+      '<p class="stem">'+q.stem+'</p>'+
+      (q.fig ? '<div class="fig">'+q.fig+'</div>' : '')+
+      '<div class="chain"><b>思路链：</b>'+q.chain+'</div>'+
+      '<div class="ans">'+q.answer+'</div>'+
+      '<div class="memo">'+q.memo+'</div>'+
+      (q.combo ? '<div class="combo-line">🔗 常联姻：'+q.combo+'</div>' : '')+
+      '</div>';
+  });
+
+  h += '<h2 class="sec" id="next">🚀 路上顺便：下周抢先看</h2>';
+  D.previews.forEach(function(n){
+    h += '<div class="ncard"><h3>'+n.title+'</h3><ul>';
+    n.points.forEach(function(p){ h += '<li>'+p+'</li>'; });
+    h += '</ul></div>';
+  });
+
+  /* 学校新题型破题卡（有才显示，空显示占位说明） */
+  if (D.newTypes && D.newTypes.length) {
+    h += '<h2 class="sec" id="newtypes">🆕 本周学校新题型 · 破题卡</h2>';
+    D.newTypes.forEach(function(t){
+      h += '<div class="nt"><h3>'+(t.subject==='math'?'📐':'🔬')+' '+t.title+'</h3>'+
+        '<div class="row"><b>怎么认：</b>'+t.feature+'</div>'+
+        '<div class="row"><b>怎么破：</b>'+t.routine+'</div>'+
+        (t.drill ? '<div class="row"><b>练一道：</b>'+t.drill+'</div>' : '')+
+        '</div>';
+    });
+  } else if (D.newTypesNote) {
+    h += '<div class="nt-note">🆕 <b>学校新题型区</b>：'+D.newTypesNote+'</div>';
+  }
+
+  /* 睡前过电影 */
+  h += '<h2 class="sec" id="bedtime">🌙 睡前过电影（5 分钟）</h2>'+
+       '<div class="quiz"><p style="font-size:13.5px; color:#6b7280;">躺床上闭眼，一题一题想。全想完了再点开对——想得出来的才是真学会了。</p>';
+  D.bedtimeQuiz.forEach(function(item){
+    h += '<div class="qq"><span class="s">'+item.subject+'</span><div class="q">'+item.q+'</div>'+
+      '<details><summary>想好了，点开对</summary><p>'+item.a+'</p></details></div>';
+  });
+  h += '</div>';
+
+  document.getElementById('content').innerHTML = h;
+
+  /* 分享：手机调系统分享面板（可发微信/QQ），电脑显示二维码+复制链接；本地打开不显示 */
+  var btnShare = document.getElementById('btn-share');
+  if (location.protocol === 'http:' || location.protocol === 'https:') {
+    btnShare.style.display = '';
+    btnShare.addEventListener('click', function(){
+      if (navigator.share) {
+        navigator.share({ title: document.title, text: '随身查阅版·路上理思路', url: location.href }).catch(function(){});
+      } else {
+        var qrBox = document.getElementById('qr-img');
+        qrBox.innerHTML = '';
+        new QRCode(qrBox, { text: location.href, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });
+        document.getElementById('share-url').textContent = location.href;
+        document.getElementById('share-mask').classList.add('show');
+      }
+    });
+    document.getElementById('share-close').addEventListener('click', function(){
+      document.getElementById('share-mask').classList.remove('show');
+    });
+    document.getElementById('btn-copy').addEventListener('click', function(){
+      var url = location.href;
+      if (navigator.clipboard) { navigator.clipboard.writeText(url); }
+      else { var ta=document.createElement('textarea'); ta.value=url; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); }
+      this.textContent = '已复制 ✓'; var b=this; setTimeout(function(){ b.textContent='复制链接'; }, 1500);
+    });
+  }
+})();
+</script>
+</body>
+</html>
