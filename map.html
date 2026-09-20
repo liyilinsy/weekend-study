@@ -96,7 +96,7 @@
   </footer>
 </div>
 
-<script src="data-map.js?v=20260921d"></script>
+<script src="data-map.js"></script>
 <script>
 (function(){
   var M = window.TYPE_MAP;
@@ -154,7 +154,7 @@
                '<div class="row"><b>⚡ 触发词：</b>' + t.trig + '</div>' +
                '<div class="row"><b>🚪 入口：</b>' + t.entry + '</div>' +
                '<div class="row"><b>🔗 常联姻：</b>' + t.combo + '</div>' +
-               (t.ex ? '<details class="exd"><summary>✏️ 例题（点开先看题）</summary><div class="ex-q">' + t.ex + '</div><div class="ex-a"><b>解：</b>' + t.ans + '</div></details>' : '<div class="ex-none">例题随批次补充</div>') +
+               (t.ex ? '<details class="exd"><summary>✏️ 例题（点开先看题）</summary><div class="ex-q">' + t.ex + '</div><div class="ex-a"><b>解：</b>' + t.ans + '</div></details>' : '') +
                '</div>';
         });
         h += '</div>';
