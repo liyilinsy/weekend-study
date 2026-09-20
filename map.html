@@ -31,6 +31,12 @@
   .tag.star{background:#fff8e6; color:#b8860b; font-weight:700;}
   .tcard .row{margin-top:4px; font-size:13.8px;}
   .tcard .row b{color:#2b6cb0;}
+  .exd{margin-top:8px; border:1px dashed #ffd6a0; background:#fffaf2; border-radius:8px; padding:6px 10px;}
+  .exd summary{cursor:pointer; font-size:13.5px; font-weight:700; color:#c0523d; list-style:none; user-select:none;}
+  .exd summary::-webkit-details-marker{display:none;}
+  .ex-q{font-size:14px; margin-top:6px;}
+  .ex-a{font-size:13.5px; margin-top:6px; color:#15693c; background:#eaffea; border-radius:6px; padding:6px 10px;}
+  .ex-none{margin-top:6px; font-size:12px; color:#c9cedb;}
   .placeholder{margin-top:10px; background:#fff4ea; border:1px dashed #ffcb9e; border-radius:10px; padding:10px 14px; font-size:14px; color:#a05a1e;}
   footer{margin-top:20px; text-align:center; font-size:12.5px; color:#9aa3b8;}
   footer a{color:#4f7cff; text-decoration:none;}
@@ -92,7 +98,9 @@
                (t.star ? '<span class="tag star">⭐ 高频</span>' : '') + '</div>' +
                '<div class="row"><b>⚡ 触发词：</b>' + t.trig + '</div>' +
                '<div class="row"><b>🚪 入口：</b>' + t.entry + '</div>' +
-               '<div class="row"><b>🔗 常联姻：</b>' + t.combo + '</div></div>';
+               '<div class="row"><b>🔗 常联姻：</b>' + t.combo + '</div>' +
+               (t.ex ? '<details class="exd"><summary>✏️ 例题（点开先看题）</summary><div class="ex-q">' + t.ex + '</div><div class="ex-a"><b>解：</b>' + t.ans + '</div></details>' : '<div class="ex-none">例题随批次补充</div>') +
+               '</div>';
         });
         h += '</div>';
       });
