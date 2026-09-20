@@ -41,6 +41,24 @@
   .ex-none{margin-top:6px; font-size:12px; color:#c9cedb;}
 
   .placeholder{margin-top:10px; background:#fff4ea; border:1px dashed #ffcb9e; border-radius:10px; padding:10px 14px; font-size:14px; color:#a05a1e;}
+
+  /* 实战例题精讲 */
+  .exlesson{background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-top:16px;}
+  .exlesson h3{font-size:16px;}
+  .exlesson .from{font-size:12.5px; color:var(--sub); margin:2px 0 8px;}
+  .exlesson img{width:100%; border:1px solid #e5e7eb; border-radius:8px; display:block;}
+  .think-hint{margin-top:8px; background:#fff7e8; border-radius:8px; padding:7px 12px; font-size:13.5px; color:#8a6414; font-weight:600;}
+  .exlesson details{margin-top:10px; border-radius:10px; padding:8px 12px;}
+  .exlesson details.step{background:#f5f8ff; border:1px solid #d6e2ff;}
+  .exlesson details.chain{background:#f0fbf5; border:1px solid #bfe9d4;}
+  .exlesson details summary{cursor:pointer; font-weight:700; font-size:14px; list-style:none; user-select:none;}
+  .exlesson details.step summary{color:#2b6cb0;}
+  .exlesson details.chain summary{color:#1d8f5c;}
+  .exlesson details summary::-webkit-details-marker{display:none;}
+  .stp{margin:7px 0; font-size:13.8px;}
+  .stp b{color:#4f46e5;}
+  .reflex-item{margin:5px 0; font-size:14px; background:#fff; border-left:3px solid #22b573; border-radius:6px; padding:6px 10px;}
+  .chain-map{margin-top:8px; font-size:13.5px; color:#186b48;}
   footer{margin-top:20px; text-align:center; font-size:12.5px; color:#9aa3b8;}
   footer a{color:#4f7cff; text-decoration:none;}
 
@@ -77,7 +95,7 @@
   </footer>
 </div>
 
-<script src="data-map.js?v=20260920b"></script>
+<script src="data-map.js?v=20260921"></script>
 <script>
 (function(){
   var M = window.TYPE_MAP;
@@ -93,6 +111,31 @@
   document.getElementById('toc').innerHTML = toc;
 
   var h = '';
+  /* 实战例题精讲：题（图）→ 拆解 → 反射，三层递进 */
+  if (window.EX_LESSONS && window.EX_LESSONS.length) {
+    h += '<h2 class="sec-h" style="margin-top:22px;">⚔️ 实战例题 · 题 → 拆解 → 条件反射</h2>';
+    h += '<p style="font-size:13px; color:var(--sub); margin-bottom:4px;">用法：每题只看图和题目，想 30 秒再点「拆解」；最后把「条件反射卡」读两遍——见条件、出动作。</p>';
+    window.EX_LESSONS.forEach(function(x, i){
+      h += '<div class="exlesson">' +
+        '<h3>' + (i+1) + ' · ' + x.subject + ' · ' + x.from.split(' · ')[1] + '</h3>' +
+        '<div class="from">📍 ' + x.from + '</div>' +
+        '<img src="' + x.img + '" alt="例题图">' +
+        '<div class="think-hint">⏱ 题目就在上图——先自己想 30 秒，想不到再点下面的拆解</div>' +
+        '<details class="step"><summary>🔍 拆解这题（七步）</summary>' +
+        '<div class="stp"><b>① 触发词：</b>' + x.steps.trig + '</div>' +
+        '<div class="stp"><b>② 入口：</b>' + x.steps.entry + '</div>' +
+        '<div class="stp"><b>③ 知识点：</b>' + x.steps.kp + '</div>' +
+        '<div class="stp"><b>④ 常联姻：</b>' + x.steps.combo + '</div>' +
+        '<div class="stp"><b>⑤ 易错判定：</b>' + x.steps.mistake + '</div>' +
+        '<div class="stp"><b>⑥ 对症训练：</b>' + x.steps.drill + '</div>' +
+        '<div class="stp"><b>⑦ 验证：</b>' + x.steps.verify + '</div>' +
+        '</details>' +
+        '<details class="chain"><summary>🧠 串联记忆 · 条件反射卡</summary>' +
+        x.chain.reflex.map(function(r){ return '<div class="reflex-item">⚡ ' + r + '</div>'; }).join('') +
+        '<div class="chain-map">🗺 ' + x.chain.map + '</div>' +
+        '</details></div>';
+    });
+  }
   M.subjects.forEach(function(s){
     s.chapters.forEach(function(c, ci){
       h += '<div class="chap" id="' + s.subject + ci + '">';
