@@ -11,7 +11,7 @@
  * ============================================================ */
 window.EX_LESSONS = [
   { id: "ex1", subject: "数学", from: "核心考点·八上 p74 例1 · 三角形内角和/外角",
-    img: "imgs/ex1_neijiaohe.png",
+    img: "imgs/ex1_neijiaohe.png?v=2",
     steps: {
       trig: "题面里的“求 x°/y°”——三角形里求角，数字们互相有账要算",
       entry: "先数已知角：知道两个 → 第三个 = 180° − 两角之和；求的是外角 → 不相邻两内角之和",
@@ -26,7 +26,7 @@ window.EX_LESSONS = [
       map: "内角和 ↔ 外角定理 ↔ 双角平分线模型 ↔ 平行线导角——四件事本质都是“角的加减法”"
     } },
   { id: "ex2", subject: "数学", from: "核心考点·八上 p54 例1 · 全等三角形证明",
-    img: "imgs/ex2_quandeng.png",
+    img: "imgs/ex2_quandeng.png?v=2",
     steps: {
       trig: "题面里的“求证：△___≌△___”",
       entry: "先数手里的条件：图中已给 AB=AC、AD=AE 两组边 → 缺夹角 → 公共角 ∠A 是同一个角（藏在图里的条件）→ SAS",
@@ -41,7 +41,7 @@ window.EX_LESSONS = [
       map: "隐含条件 → 选判定 → 全等 → 对应边等 → 新的等腰/平行（链式出题路径）"
     } },
   { id: "ex3", subject: "数学", from: "核心考点·八上 p84 例1 · 等腰三角形性质",
-    img: "imgs/ex3_dengyao.png",
+    img: "imgs/ex3_dengyao.png?v=2",
     steps: {
       trig: "题面里的“AB=AC”＋给了一个角度",
       entry: "等边对等角 → 两底角相等 → 底角 = (180°−顶角)÷2",
@@ -56,7 +56,7 @@ window.EX_LESSONS = [
       map: "等边对等角 ↔ 内角和 ↔ 三线合一 ↔ 分类讨论——等腰题四件套"
     } },
   { id: "ex4", subject: "数学", from: "核心考点·八上 p95 例 · 等边三角形与含30°角",
-    img: "imgs/ex4_30du.png",
+    img: "imgs/ex4_30du.png?v=2",
     steps: {
       trig: "题面里的“等边三角形”＋“中点”或“30°”",
       entry: "等边每边每角都相等 → 中点把大边折半 → 连出含 30° 的直角三角形 → 对边 = 斜边一半",
@@ -71,7 +71,7 @@ window.EX_LESSONS = [
       map: "等边三角形 ↔ 对折 ↔ 30°直角三角形 ↔ 勾股——一条线上的四个伙伴"
     } },
   { id: "ex5", subject: "数学", from: "核心考点·八上 p101 例 · 最短路径（将军饮马）",
-    img: "imgs/ex5_jiangjun.png",
+    img: "imgs/ex5_jiangjun.png?v=2",
     steps: {
       trig: "题面里的“PA+PB 最小/最短”＋P 在直线 l 上动",
       entry: "化折为直：作 A 关于 l 的对称点 A′（PA=PA′）→ 连 A′B（两点之间线段最短）→ 与 l 的交点就是 P",
@@ -86,7 +86,7 @@ window.EX_LESSONS = [
       map: "轴对称 ↔ 最短路径 ↔ 勾股求值 ↔ 坐标系——一个模型四种皮"
     } },
   { id: "ex6", subject: "物理", from: "物理大培优·八上 p23 例 · s-t 图像",
-    img: "imgs/ex6_stimg.png",
+    img: "imgs/ex6_stimg.png?v=2",
     steps: {
       trig: "题面里的“s-t 图像”＋求速度/平均速度",
       entry: "图像三句话：越陡越快、水平静止、落回横轴=返回出发点；平均速度=总路程÷总时间（休息照算）",
