@@ -46,7 +46,8 @@
   .exlesson{background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-top:16px;}
   .exlesson h3{font-size:16px;}
   .exlesson .from{font-size:12.5px; color:var(--sub); margin:2px 0 8px;}
-  .exlesson img{width:100%; max-width:440px; border:1px solid #e5e7eb; border-radius:8px; display:block; margin:0 auto; background:#fff;}
+  .exlesson img{width:100%; border:1px solid #e5e7eb; border-radius:8px; display:block; background:#fff;}
+  .exlesson a.imglink{display:block;}
   .think-hint{margin-top:8px; background:#fff7e8; border-radius:8px; padding:7px 12px; font-size:13.5px; color:#8a6414; font-weight:600;}
   .exlesson details{margin-top:10px; border-radius:10px; padding:8px 12px;}
   .exlesson details.step{background:#f5f8ff; border:1px solid #d6e2ff;}
@@ -95,7 +96,7 @@
   </footer>
 </div>
 
-<script src="data-map.js?v=20260921c"></script>
+<script src="data-map.js?v=20260921d"></script>
 <script>
 (function(){
   var M = window.TYPE_MAP;
@@ -119,8 +120,8 @@
       h += '<div class="exlesson">' +
         '<h3>' + (i+1) + ' · ' + x.subject + ' · ' + x.from.split(' · ')[1] + '</h3>' +
         '<div class="from">📍 ' + x.from + '</div>' +
-        '<img src="' + x.img + '" alt="例题图">' +
-        '<div class="think-hint">⏱ 题目就在上图——先自己想 30 秒，想不到再点下面的拆解</div>' +
+        '<a class="imglink" href="' + x.img + '" target="_blank" title="点击放大看题"><img src="' + x.img + '" alt="例题图"></a>' +
+        '<div class="think-hint">⏱ 题目就在上图（看不清就点图片放大）——先自己想 30 秒，想不到再点下面的拆解</div>' +
         '<details class="step"><summary>🔍 拆解这题（七步）</summary>' +
         '<div class="stp"><b>① 触发词：</b>' + x.steps.trig + '</div>' +
         '<div class="stp"><b>② 入口：</b>' + x.steps.entry + '</div>' +
