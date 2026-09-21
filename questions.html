@@ -97,34 +97,13 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
       });
     });
   })();
-  var EXTRA_RULES = [
-    ['翻折', '外角定理（含折叠/角平分）'], ['折叠', '外角定理（含折叠/角平分）'],
-    ['对称轴', '性质求角/边'], ['轴对称', '性质求角/边'], ['格点', '格点作对称图形'],
-    ['垂直平分线', '性质求长度'], ['角平分线', '性质求距离/证线段等'],
-    ['等腰', '等边对等角求角度'], ['等边', '等边判定'], ['30°', '含30°直角三角形求边'],
-    ['全等', '找条件证全等'], ['证：△', '找条件证全等'], ['最短', '将军饮马基本型'], ['最小', '将军饮马基本型'],
-    ['内角和', '内角和求角'], ['多边形', '多边形内角和/边数'], ['中线', '中线等分面积'],
-    ['完全平方', '完全平方公式'], ['平方差', '平方差公式'], ['因式分解', '公式法分解'],
-    ['分式方程', '解分式方程（必验根）'], ['通分', '分式加减（通分）'], ['约分', '约分与最简分式'],
-    ['幂', '幂四则运算'], ['停表', '停表读数化秒'], ['刻度尺', '刻度尺读数（估读）'],
-    ['平均速度', '平均速度（总÷总）'], ['参照物', '参照物判断'], ['过桥', '火车过桥/隧道'],
-    ['音调', '音调·响度·音色辨析'], ['响度', '音调·响度·音色辨析'], ['音色', '音调·响度·音色辨析'],
-    ['回声', '回声测距'], ['噪声', '噪声控制三环节'], ['超声', '超声与次声'], ['次声', '超声与次声'],
-    ['波形', '波形图识读'], ['误差', '测量误差与多次测量'],
-    ['匀速', 'v-t 图像'], ['静止', '参照物判断'], ['运动状态', '参照物判断'],
-    ['路程', 'v=s/t 基本计算'], ['时间', 'v=s/t 基本计算'], ['速度', 'v=s/t 基本计算'],
-    ['km/h', '速度单位换算'], ['m/s', '速度单位换算'], ['刻度', '刻度尺读数（估读）'],
-    ['振动', '声音的产生'], ['传播', '传播条件与真空'], ['介质', '传播条件与真空'],
-    ['频率', '音调·响度·音色辨析'], ['振幅', '音调·响度·音色辨析'],
-    ['信息', '声传递信息vs能量'], ['能量', '声传递信息vs能量'],
-    ['真空', '传播条件与真空'], ['月球', '传播条件与真空']
-  ];
   function taoluHTML(q){
     var hit = null;
-    for (var e = 0; e < EXTRA_RULES.length; e++){
-      if (q.stem.indexOf(EXTRA_RULES[e][0]) >= 0){
-        var sm = (window.STEPS_MAP['数学']||{})[EXTRA_RULES[e][1]] || (window.STEPS_MAP['物理']||{})[EXTRA_RULES[e][1]];
-        if (sm) { hit = {name: EXTRA_RULES[e][1], st: sm}; break; }
+    var QK = window.QKEYS || [];
+    for (var e = 0; e < QK.length; e++){
+      if (q.stem.indexOf(QK[e][0]) >= 0){
+        var sm = (window.STEPS_MAP[QK[e][1]]||{})[QK[e][2]];
+        if (sm) { hit = {name: QK[e][2], st: sm, kw: QK[e][0], subj: QK[e][1]}; break; }
       }
     }
     if (!hit) for (var i = 0; i < TYPE_BY_RULE.length; i++){
@@ -139,7 +118,8 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
       '<div class="tl"><b>🚪 对症练：</b>' + hit.st.drill.split('；')[0] + '</div>' +
       '<div class="tl"><b>❓ 易错：</b>' + hit.st.mistake.split('；')[0] + '</div>' +
       '<div class="tl rfxs">' + hit.st.reflex.slice(0,2).map(function(r){ return '<span class="rfxq">' + r + '</span>'; }).join('') + '</div>' +
-      '<a class="more" href="map3.html">完整七步拆解 →</a></details>';
+      '<a class="more" href="map3.html">完整七步拆解 →</a>' +
+      '<a class="more" href="questions.html?q=' + encodeURIComponent(hit.kw) + '">该题型全部题目 →</a></details>';
   }
   var groups = {}, gnames = [];
   var SUBJ = '数学';
@@ -174,6 +154,10 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
     document.getElementById('toc').innerHTML = toc;
   }
   renderHeader();
+  (function(){
+    var mq = new URLSearchParams(location.search).get('q');
+    if (mq){ kw = mq; document.getElementById('kw').value = mq; render(); }
+  })();
 
   var h = '';
   gnames.forEach(function(g, i){
