@@ -33,6 +33,11 @@
   .tag.star{background:#fff8e6; color:#b8860b; font-weight:700;}
   .tcard .row{margin-top:4px; font-size:13.8px;}
   .tcard .row b{color:#2b6cb0;}
+  details.sevend{margin-top:6px; border-top:1px dashed #dde2ec; padding-top:6px;}
+  details.sevend summary{font-size:13px; color:#7c3aed; cursor:pointer; font-weight:600;}
+  .reflexbox{margin-top:6px;}
+  .reflexbox b{display:block; font-size:12px; color:#7c3aed; margin-bottom:4px;}
+  .rfx{display:inline-block; background:#f3efff; border:1px solid #d8ccff; color:#5b21b6; border-radius:8px; padding:2px 9px; font-size:12.3px; margin:2px 4px 2px 0; line-height:1.7;}
   .exd{margin-top:8px; border:1px dashed #ffd6a0; background:#fffaf2; border-radius:8px; padding:6px 10px;}
   .exd summary{cursor:pointer; font-size:13.5px; font-weight:700; color:#c0523d; list-style:none; user-select:none;}
   .exd summary::-webkit-details-marker{display:none;}
@@ -101,6 +106,8 @@
 
 <script src="data-map-v2.js"></script>
 <script src="data-map-v4e.js?v=20260921f"></script>
+<script src="data-steps-math.js?v=20260921a"></script>
+<script src="data-steps-phys.js?v=20260921a"></script>
 <script>
 (function(){
   var M = window.TYPE_MAP;
@@ -154,12 +161,21 @@
       c.sections.forEach(function(sec){
         h += '<div class="sec-h">' + sec.section + '</div><div class="grid2">';
         sec.types.forEach(function(t){
+          var st = null;
+          try { st = (window.STEPS_MAP[s.subject]||{})[(t.name||'').replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF\uFE0F\u2B50\u2B55]/gu,'').trim()] || (window.STEPS_MAP[s.subject]||{})[t.name]; } catch(e){}
           h += '<div class="tcard"><div class="name">' + t.name +
                (t.weak ? '<span class="tag weak">🔴 薄弱</span>' : '') +
                (t.star ? '<span class="tag star">⭐ 高频</span>' : '') + '</div>' +
                '<div class="row"><b>⚡ 触发词：</b>' + t.trig + '</div>' +
                '<div class="row"><b>🚪 入口：</b>' + t.entry + '</div>' +
                '<div class="row"><b>🔗 常联姻：</b>' + t.combo + '</div>' +
+               (st ? '<details class="sevend"><summary>🧠 七步完整拆解（点开）</summary>' +
+                 '<div class="row"><b>📍 知识点：</b>' + (sec.section + '（' + c.chapter.split('（')[0] + '）') + '</div>' +
+                 '<div class="row"><b>❓ 错因判定：</b>' + st.mistake + '</div>' +
+                 '<div class="row"><b>💊 对症训练：</b>' + st.drill + '</div>' +
+                 '<div class="row"><b>🔁 双重验证：</b>' + st.verify + '</div>' +
+                 '<div class="reflexbox"><b>⚡ 条件反射卡</b>' + st.reflex.map(function(r){ return '<span class="rfx">' + r + '</span>'; }).join('') + '</div>' +
+                 '</details>' : '') +
                (t.ex ? '<details class="exd"><summary>✏️ 例题（点开先看题）</summary><div class="ex-q">' + t.ex + '</div><div class="ex-a"><b>解：</b>' + t.ans + '</div></details>' : '') +
                '</div>';
         });
