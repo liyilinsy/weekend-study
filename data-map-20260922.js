@@ -5,6 +5,7 @@
  * ============================================================ */
 window.EX_LESSONS = [
   { id: "ex1", subject: "数学", from: "核心考点·八上 p74 例1 · 三角形内角和定理",
+    stemText: "如图所示，求 ∠1+∠2+∠3+∠4+∠5 的度数。（书 p74 原题）",
     stemImg: "imgs/ex1_s3.png", fig: "imgs/ex1_f3.png",
     steps: {
       trig: "题面里的“求 ∠1+∠2+…+∠5 的度数”——五个分散在各尖角上的角求和",
@@ -20,6 +21,7 @@ window.EX_LESSONS = [
       map: "内角和 ↔ 外角定理 ↔ 多边形内角和 ↔ 8字/飞镖/五角星模型——全是“角的搬家术”"
     } },
   { id: "ex2", subject: "数学", from: "核心考点·八上 p54 例1 · 全等三角形证明",
+    stemText: "如图，点 D、E 分别在 AB、AC 上，AB=AC，AD=AE。求证：△ABE≌△ACD。（书 p54 原题）",
     stemImg: "imgs/ex2_s3.png", fig: "imgs/ex2_f3.png",
     steps: {
       trig: "题面里的“求证：△___≌△___”",
@@ -35,6 +37,7 @@ window.EX_LESSONS = [
       map: "隐含条件 → 选判定 → 全等 → 对应边等 → 新的等腰/平行（链式出题路径）"
     } },
   { id: "ex3", subject: "数学", from: "核心考点·八上 p84 例1 · 等腰三角形的性质",
+    stemText: "如图，在△ABC 中，AB=AC，点 D 在 BC 边上。<br>请利用等腰三角形的性质，结合图中标注的角度，求出图中的未知角。 <span style=\"color:#999;font-size:12px;\">（题干按图中条件编写，角度以图中标注为准）</span>",
     stemImg: "imgs/ex3_s3.png", fig: "imgs/ex3_f3.png",
     steps: {
       trig: "题面里的“AB=AC”＋图中角度标注（等腰三角形求角）",
@@ -50,6 +53,7 @@ window.EX_LESSONS = [
       map: "等边对等角 ↔ 内角和 ↔ 三线合一 ↔ 分类讨论——等腰题四件套"
     } },
   { id: "ex4", subject: "数学", from: "核心考点·八上 p95 例1 · 等边三角形/含30°角",
+    stemText: "如图，在△ABC 中，∠BAC=90°，D 是 BC 边上一点，△ACD 是等边三角形。<br>求证：∠B=30°。 <span style=\"color:#999;font-size:12px;\">（题干按图中条件编写）</span>",
     stemImg: "imgs/ex4_s3.png", fig: "imgs/ex4_f3.png",
     steps: {
       trig: "题面里的“等边/60°”＋图中的直角结构",
@@ -65,6 +69,7 @@ window.EX_LESSONS = [
       map: "等边三角形 ↔ 对折 ↔ 30°直角三角形 ↔ 勾股——一条线上的四个伙伴"
     } },
   { id: "ex5", subject: "数学", from: "核心考点·八上 p101 例题 · 最短路径（将军饮马）",
+    stemText: "如图，直线 l 的同侧有两点 A、B。请在直线 l 上求作一点 P，使 PA+PB 的值最小。 <span style=\"color:#999;font-size:12px;\">（题干按书中原题整理）</span>",
     stemImg: "imgs/ex5_s3.png", fig: "imgs/ex5_f3.png",
     steps: {
       trig: "题面里的“PA+PB 最小/最短”＋P 在直线 l 上动",
@@ -80,6 +85,7 @@ window.EX_LESSONS = [
       map: "轴对称 ↔ 最短路径 ↔ 勾股求值 ↔ 坐标系——一个模型四种皮"
     } },
   { id: "ex6", subject: "物理", from: "物理大培优·八上 p23 例 · s-t 图像",
+    stemText: "某物体做直线运动，其 s-t 图像如图所示。<br>根据图像回答：① 各段分别做什么运动？速度多大？② 全程平均速度是多少？ <span style=\"color:#999;font-size:12px;\">（数据以图中坐标为准）</span>",
     stemImg: "imgs/ex6_s3.png", fig: "imgs/ex6_f3.png",
     steps: {
       trig: "题面里的“s-t 图像”＋求速度/运动状态",
