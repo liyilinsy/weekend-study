@@ -33,6 +33,12 @@
   .tag.star{background:#fff8e6; color:#b8860b; font-weight:700;}
   .tcard .row{margin-top:4px; font-size:13.8px;}
   .tcard .row b{color:#2b6cb0;}
+  details.relq{margin-top:6px;}
+  details.relq summary{font-size:13px; color:#2563eb; cursor:pointer; font-weight:600;}
+  .rq{display:block; font-size:12.3px; color:#374151; text-decoration:none; background:#f0f5ff; border-radius:6px; padding:4px 8px; margin-top:4px; line-height:1.5;}
+  .rq:hover{background:#dbeafe;}
+  .rqpg{display:inline-block; background:#2563eb; color:#fff; border-radius:4px; font-size:11px; padding:1px 6px; margin-right:6px;}
+  .rqmore{font-size:11.5px; color:#9aa3b8; margin-top:4px;}
   details.sevend{margin-top:6px; border-top:1px dashed #dde2ec; padding-top:6px;}
   details.sevend summary{font-size:13px; color:#7c3aed; cursor:pointer; font-weight:600;}
   .reflexbox{margin-top:6px;}
@@ -108,8 +114,25 @@
 <script src="data-map-v4e.js?v=20260921f"></script>
 <script src="data-steps-math.js?v=20260921a"></script>
 <script src="data-steps-phys.js?v=20260921a"></script>
+<script src="data-questions-math-v3.js?v=20260922b"></script>
+<script src="data-questions-phys-v3.js?v=20260922b"></script>
 <script>
 (function(){
+  function relatedQs(subject, typeName){
+    var QK = window.QKEYS || [];
+    var kws = [];
+    QK.forEach(function(k){ if (k[1] === subject && k[2] === typeName) kws.push(k[0]); });
+    if (!kws.length) return {count: 0, items: []};
+    var bank = subject === '数学' ? (window.QBANK || {questions: []}) : (window.QBANK_PHYS || {questions: []});
+    var out = [], total = 0;
+    for (var i = 0; i < bank.questions.length; i++){
+      var q = bank.questions[i];
+      var hitKw = null;
+      for (var k = 0; k < kws.length; k++){ if (q.stem.indexOf(kws[k]) >= 0){ hitKw = kws[k]; break; } }
+      if (hitKw){ total++; if (out.length < 3) out.push({page: q.page, qid: q.qid, stem: q.stem.replace(/<[^>]*>/g,'').slice(0, 44) + '…', kw: hitKw}); }
+    }
+    return {count: total, items: out};
+  }
   var M = window.TYPE_MAP;
   document.getElementById('hero-sub').textContent =
     M.books.map(function(b){ return b.name + '：' + b.status; }).join(' ｜ ');
@@ -163,12 +186,25 @@
         sec.types.forEach(function(t){
           var st = null;
           try { st = (window.STEPS_MAP[s.subject]||{})[(t.name||'').replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF\uFE0F\u2B50\u2B55]/gu,'').trim()] || (window.STEPS_MAP[s.subject]||{})[t.name]; } catch(e){}
+          // 相关真题: 该题型的关键词匹配题库
+          var rel = relatedQs(s.subject, t.name);
+          var relHTML = '';
+          if (rel.count > 0){
+            relHTML = '<details class="relq"><summary>📝 相关真题 ' + rel.count + ' 道（点开直接做题）</summary>' +
+              rel.items.map(function(rq){
+                return '<a class="rq" href="questions.html?q=' + encodeURIComponent(rq.kw) + '" target="_blank">' +
+                  '<span class="rqpg">书p' + rq.page + '·' + rq.qid + '</span>' + rq.stem + '</a>';
+              }).join('') +
+              (rel.count > rel.items.length ? '<div class="rqmore">…还有 ' + (rel.count - rel.items.length) + ' 道，点任意题目进题库看全部</div>' : '') +
+              '</details>';
+          }
           h += '<div class="tcard"><div class="name">' + t.name +
                (t.weak ? '<span class="tag weak">🔴 薄弱</span>' : '') +
                (t.star ? '<span class="tag star">⭐ 高频</span>' : '') + '</div>' +
                '<div class="row"><b>⚡ 触发词：</b>' + t.trig + '</div>' +
                '<div class="row"><b>🚪 入口：</b>' + t.entry + '</div>' +
                '<div class="row"><b>🔗 常联姻：</b>' + t.combo + '</div>' +
+               relHTML +
                (st ? '<details class="sevend"><summary>🧠 七步完整拆解（点开）</summary>' +
                  '<div class="row"><b>📍 知识点：</b>' + (sec.section + '（' + c.chapter.split('（')[0] + '）') + '</div>' +
                  '<div class="row"><b>❓ 错因判定：</b>' + st.mistake + '</div>' +
