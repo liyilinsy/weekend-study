@@ -97,7 +97,7 @@
   </footer>
 </div>
 
-<script src="data-map-20260921.js"></script>
+<script src="data-map-20260922.js"></script>
 <script>
 (function(){
   var M = window.TYPE_MAP;
@@ -121,7 +121,7 @@
       h += '<div class="exlesson">' +
         '<h3>' + (i+1) + ' · ' + x.subject + ' · ' + x.from.split(' · ')[1] + '</h3>' +
         '<div class="from">📍 ' + x.from + '</div>' +
-        '<div class="stem-text">' + x.stemText + '</div>' +
+        '<a class="imglink" href="' + x.stemImg + '" target="_blank"><img src="' + x.stemImg + '" alt="题干" style="margin-top:0;"></a>' +
         '<a class="imglink" href="' + x.fig + '" target="_blank"><img src="' + x.fig + '" alt="几何图"></a>' +
         '<div class="think-hint">⏱ 题干在上方、图形在下方——先自己想 30 秒，想不到再点下面的拆解</div>' +
         '<details class="step"><summary>🔍 拆解这题（七步）</summary>' +
