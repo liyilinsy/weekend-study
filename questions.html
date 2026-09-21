@@ -12,7 +12,10 @@ body { font-family:"Microsoft YaHei",system-ui,sans-serif; background:var(--bg);
 header { background:linear-gradient(135deg,#1e3a8a,#2563eb); color:#fff; border-radius:14px; padding:20px 22px; margin-bottom:14px; }
 header h1 { font-size:21px; }
 header .sub { font-size:13px; opacity:.92; margin-top:6px; line-height:1.7; }
-.stats { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+.subj{margin-top:10px; display:flex; gap:8px;}
+  .subj button{border:1px solid rgba(255,255,255,.5); background:rgba(255,255,255,.15); color:#fff; border-radius:18px; padding:6px 16px; font-size:13.5px; cursor:pointer;}
+  .subj button.on{background:#fff; color:#1e3a8a; font-weight:bold;}
+  .stats { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
 .stat { background:rgba(255,255,255,.15); border-radius:8px; padding:6px 12px; font-size:12.5px; }
 .stat b { font-size:16px; }
 nav.toc { position:sticky; top:0; z-index:5; background:var(--bg); padding:8px 0; display:flex; gap:6px; flex-wrap:wrap; }
@@ -40,12 +43,19 @@ footer { text-align:center; color:#999; font-size:12px; padding:18px 0 30px; lin
 .filter .fbtns { display:flex; gap:6px; }
 .filter button { border:1px solid #d7dbe7; background:#fff; border-radius:14px; padding:5px 12px; font-size:12.5px; cursor:pointer; }
 .filter button.on { background:var(--blue); color:#fff; border-color:var(--blue); }
+details.taolu{margin-top:8px; border:1px solid #d8ccff; border-radius:8px; padding:6px 10px; background:#faf8ff;}
+details.taolu summary{font-size:12.8px; color:#7c3aed; cursor:pointer; font-weight:600;}
+details.taolu .tl{font-size:12.3px; margin-top:5px; line-height:1.6; color:#4b5563;}
+details.taolu .rfxs{margin-top:4px;}
+.rfxq{display:inline-block; background:#f3efff; border:1px solid #d8ccff; color:#5b21b6; border-radius:8px; padding:2px 8px; font-size:11.8px; margin:2px 3px 2px 0;}
+details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display:inline-block; margin-top:4px;}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>📚 核心考点·八上数学 全书题库</h1>
+    <h1>📚 八上全书题库 · 数学×物理</h1>
+    <div class="subj"><button id="sj-math" class="on">📐 数学（核心考点）</button><button id="sj-phys">🔬 物理（大培优）</button></div>
     <div class="sub" id="hero-sub">教师用书全书题目 · 方案三流水线（OCR锚定+投影裁剪+三道程序检查）</div>
     <div class="stats" id="stats"></div>
   </header>
@@ -68,29 +78,95 @@ footer { text-align:center; color:#999; font-size:12px; padding:18px 0 30px; lin
   </footer>
 </div>
 <script src="data-questions-math-v2.js?v=20260921b"></script>
+<script src="data-steps-math.js?v=20260921a"></script>
+<script src="data-steps-phys.js?v=20260921a"></script>
+<script src="data-questions-phys-v1.js?v=20260921a"></script>
 <script>
 (function(){
-  var Q = window.QBANK;
-  document.getElementById('hero-sub').textContent = Q.meta.desc;
-  var s = document.getElementById('stats');
-  s.innerHTML = [
-    ['总题数', Q.meta.total], ['配图题', Q.meta.figured], ['检查通过', Q.meta.ok],
-    ['待核', Q.meta.warn], ['图待补', Q.meta.miss]
-  ].map(function(p){ return '<div class="stat">' + p[0] + ' <b>' + p[1] + '</b></div>'; }).join('');
-
-  // 按章分组
-  var groups = {};
-  Q.questions.forEach(function(q){
-    var g = q.chapter || '其他';
-    (groups[g] = groups[g] || []).push(q);
-  });
-  var gnames = Object.keys(groups);
-
-  var toc = '';
-  gnames.forEach(function(g, i){
-    toc += '<a href="#ch' + i + '">' + g.slice(0, 14) + '(' + groups[g].length + ')</a>';
-  });
-  document.getElementById('toc').innerHTML = toc;
+  var TYPE_BY_RULE = [];
+  (function(){
+    ['数学','物理'].forEach(function(subj){
+      var m = (window.STEPS_MAP||{})[subj] || {};
+      Object.keys(m).forEach(function(tn){
+        var kws = [];
+        m[tn].reflex.forEach(function(r){
+          var mt = r.match(/见['‘“]([^'‘“→]{2,10})['‘“]/);
+          if (mt) kws.push(mt[1].replace(/的/g,''));
+        });
+        if (kws.length) TYPE_BY_RULE.push({subj: subj, name: tn, kws: kws, st: m[tn]});
+      });
+    });
+  })();
+  var EXTRA_RULES = [
+    ['翻折', '外角定理（含折叠/角平分）'], ['折叠', '外角定理（含折叠/角平分）'],
+    ['对称轴', '性质求角/边'], ['轴对称', '性质求角/边'], ['格点', '格点作对称图形'],
+    ['垂直平分线', '性质求长度'], ['角平分线', '性质求距离/证线段等'],
+    ['等腰', '等边对等角求角度'], ['等边', '等边判定'], ['30°', '含30°直角三角形求边'],
+    ['全等', '找条件证全等'], ['证：△', '找条件证全等'], ['最短', '将军饮马基本型'], ['最小', '将军饮马基本型'],
+    ['内角和', '内角和求角'], ['多边形', '多边形内角和/边数'], ['中线', '中线等分面积'],
+    ['完全平方', '完全平方公式'], ['平方差', '平方差公式'], ['因式分解', '公式法分解'],
+    ['分式方程', '解分式方程（必验根）'], ['通分', '分式加减（通分）'], ['约分', '约分与最简分式'],
+    ['幂', '幂四则运算'], ['停表', '停表读数化秒'], ['刻度尺', '刻度尺读数（估读）'],
+    ['平均速度', '平均速度（总÷总）'], ['参照物', '参照物判断'], ['过桥', '火车过桥/隧道'],
+    ['音调', '音调·响度·音色辨析'], ['响度', '音调·响度·音色辨析'], ['音色', '音调·响度·音色辨析'],
+    ['回声', '回声测距'], ['噪声', '噪声控制三环节'], ['超声', '超声与次声'], ['次声', '超声与次声'],
+    ['波形', '波形图识读'], ['误差', '测量误差与多次测量']
+  ];
+  function taoluHTML(q){
+    var hit = null;
+    for (var e = 0; e < EXTRA_RULES.length; e++){
+      if (q.stem.indexOf(EXTRA_RULES[e][0]) >= 0){
+        var sm = (window.STEPS_MAP['数学']||{})[EXTRA_RULES[e][1]] || (window.STEPS_MAP['物理']||{})[EXTRA_RULES[e][1]];
+        if (sm) { hit = {name: EXTRA_RULES[e][1], st: sm}; break; }
+      }
+    }
+    if (!hit) for (var i = 0; i < TYPE_BY_RULE.length; i++){
+      var t = TYPE_BY_RULE[i];
+      for (var k = 0; k < t.kws.length; k++){
+        if (q.stem.indexOf(t.kws[k]) >= 0){ hit = t; break; }
+      }
+      if (hit) break;
+    }
+    if (!hit) return '';
+    return '<details class="taolu"><summary>⚡ 本题套路：' + hit.name + '（点开看七步）</summary>' +
+      '<div class="tl"><b>🚪 对症练：</b>' + hit.st.drill.split('；')[0] + '</div>' +
+      '<div class="tl"><b>❓ 易错：</b>' + hit.st.mistake.split('；')[0] + '</div>' +
+      '<div class="tl rfxs">' + hit.st.reflex.slice(0,2).map(function(r){ return '<span class="rfxq">' + r + '</span>'; }).join('') + '</div>' +
+      '<a class="more" href="map3.html">完整七步拆解 →</a></details>';
+  }
+  var groups = {}, gnames = [];
+  var SUBJ = '数学';
+  function getQ(){ return SUBJ === '数学' ? window.QBANK : window.QBANK_PHYS; }
+  var Q = getQ();
+  function switchSubject(s){
+    if (SUBJ === s) return;
+    SUBJ = s;
+    document.getElementById('sj-math').classList.toggle('on', s === '数学');
+    document.getElementById('sj-phys').classList.toggle('on', s === '物理');
+    Q = getQ();
+    kw = ''; document.getElementById('kw').value = '';
+    fmode = 'all';
+    document.querySelectorAll('.fbtns button').forEach(function(x){ x.classList.toggle('on', x.dataset.f === 'all'); });
+    renderHeader(); render();
+  }
+  document.getElementById('sj-math').addEventListener('click', function(){ switchSubject('数学'); });
+  document.getElementById('sj-phys').addEventListener('click', function(){ switchSubject('物理'); });
+  function renderHeader(){
+    document.getElementById('hero-sub').textContent = Q.meta.desc;
+    var s = document.getElementById('stats');
+    s.innerHTML = [
+      ['总题数', Q.meta.total], ['配图题', Q.meta.figured], ['检查通过', Q.meta.ok],
+      ['待核', Q.meta.warn], ['图待补', Q.meta.miss]
+    ].map(function(p){ return '<div class="stat">' + p[0] + ' <b>' + p[1] + '</b></div>'; }).join('');
+    var groups0 = {};
+    Q.questions.forEach(function(q){ var g = q.chapter || '其他'; (groups0[g] = groups0[g] || []).push(q); });
+    gnames = Object.keys(groups0);
+    groups = groups0;
+    var toc = '';
+    gnames.forEach(function(g, i){ toc += '<a href="#ch' + i + '">' + g.slice(0, 14) + '(' + groups[g].length + ')</a>'; });
+    document.getElementById('toc').innerHTML = toc;
+  }
+  renderHeader();
 
   var h = '';
   gnames.forEach(function(g, i){
@@ -108,6 +184,7 @@ footer { text-align:center; color:#999; font-size:12px; padding:18px 0 30px; lin
         (q.img ? '<img loading="lazy" src="' + q.img + '" alt="几何图">' :
                  '<div class="nofig">📎 本题为格点作图（灰色网格），图待人工补录</div>') +
         (q.stemImg ? '<details class="orig"><summary>📜 书页题干原样（点开核对）</summary><img loading="lazy" src="' + q.stemImg + '" alt="题干原样"></details>' : '') +
+        taoluHTML(q) +
         '</div>';
     });
     h += '</div></section>';
@@ -146,7 +223,7 @@ footer { text-align:center; color:#999; font-size:12px; padding:18px 0 30px; lin
           '<span class="st ' + stc + '">' + stt + '</span></div>' +
           '<div class="stem">' + q.stem + '</div>' +
           (q.img ? '<img loading="lazy" src="' + q.img + '" alt="几何图">' :
-                   '<div class="nofig">📎 格点作图题，图待人工补录</div>') + '</div>';
+                   '<div class="nofig">📎 格点作图题，图待人工补录</div>') + taoluHTML(q) + '</div>';
       });
       hh += '</div></section>';
     });
