@@ -35,6 +35,11 @@ details.orig summary { font-size:12px; color:#999; cursor:pointer; }
 details.orig img { max-width:100%; }
 footer { text-align:center; color:#999; font-size:12px; padding:18px 0 30px; line-height:1.8; }
 @media(min-width:1440px){ .wrap{max-width:1150px} .qgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px} }
+.filter { background:var(--card); border:1px solid #e5e8f0; border-radius:10px; padding:10px 12px; margin-bottom:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.filter input { flex:1; min-width:200px; border:1px solid #d7dbe7; border-radius:8px; padding:8px 12px; font-size:14px; }
+.filter .fbtns { display:flex; gap:6px; }
+.filter button { border:1px solid #d7dbe7; background:#fff; border-radius:14px; padding:5px 12px; font-size:12.5px; cursor:pointer; }
+.filter button.on { background:var(--blue); color:#fff; border-color:var(--blue); }
 </style>
 </head>
 <body>
@@ -45,6 +50,15 @@ footer { text-align:center; color:#999; font-size:12px; padding:18px 0 30px; lin
     <div class="stats" id="stats"></div>
   </header>
   <nav class="toc" id="toc"></nav>
+  <div class="filter">
+    <input id="kw" type="search" placeholder="🔍 搜题干关键词，如：轴对称 / 分式 / 翻折 / 压轴…">
+    <div class="fbtns">
+      <button data-f="all" class="on">全部</button>
+      <button data-f="ok">✓ 通过检查</button>
+      <button data-f="warn">⚠ 待核</button>
+      <button data-f="miss">图待补</button>
+    </div>
+  </div>
   <div id="content"></div>
   <footer>
     <span class="st ok">✓ 通过三道检查</span>＝题干+图可直接用 ｜
@@ -80,8 +94,10 @@ footer { text-align:center; color:#999; font-size:12px; padding:18px 0 30px; lin
 
   var h = '';
   gnames.forEach(function(g, i){
+    var qs = groups[g].filter(currentFilter);
+    if (!qs.length) return;
     h += '<section class="chap" id="ch' + i + '"><h2>' + g + '</h2><div class="qgrid">';
-    groups[g].forEach(function(q){
+    qs.forEach(function(q){
       var stc = q.status === 'ok' ? 'ok' : (q.status === 'miss_fig' ? 'miss' : 'warn');
       var stt = q.status === 'ok' ? '✓ 通过' : (q.status === 'miss_fig' ? '图待补' : '⚠ 待核');
       h += '<div class="q"><div class="tag">' +
@@ -97,6 +113,45 @@ footer { text-align:center; color:#999; font-size:12px; padding:18px 0 30px; lin
     h += '</div></section>';
   });
   document.getElementById('content').innerHTML = h;
+
+  // 搜索 + 状态过滤
+  var kw = '', fmode = 'all';
+  function currentFilter(q){
+    if (fmode === 'ok' && q.status !== 'ok') return false;
+    if (fmode === 'warn' && q.status.indexOf('warn') !== 0) return false;
+    if (fmode === 'miss' && q.status !== 'miss_fig') return false;
+    if (kw && q.stem.indexOf(kw) === -1 && (q.section || '').indexOf(kw) === -1) return false;
+    return true;
+  }
+  document.getElementById('kw').addEventListener('input', function(e){ kw = e.target.value.trim(); render(); });
+  document.querySelectorAll('.fbtns button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.fbtns button').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on'); fmode = b.dataset.f; render();
+    });
+  });
+  function render(){ /* 重渲染主体(复用上面的分组渲染) */ renderBody(); }
+  function renderBody(){
+    var hh = '';
+    gnames.forEach(function(g, i){
+      var qs = groups[g].filter(currentFilter);
+      if (!qs.length) return;
+      hh += '<section class="chap" id="ch' + i + '"><h2>' + g + '</h2><div class="qgrid">';
+      qs.forEach(function(q){
+        var stc = q.status === 'ok' ? 'ok' : (q.status === 'miss_fig' ? 'miss' : 'warn');
+        var stt = q.status === 'ok' ? '✓ 通过' : (q.status === 'miss_fig' ? '图待补' : '⚠ 待核');
+        hh += '<div class="q"><div class="tag">' +
+          '<span class="pg">书p' + q.page + ' · ' + q.qid + '</span>' +
+          '<span class="sec">' + (q.section || '') + '</span>' +
+          '<span class="st ' + stc + '">' + stt + '</span></div>' +
+          '<div class="stem">' + q.stem + '</div>' +
+          (q.img ? '<img loading="lazy" src="' + q.img + '" alt="几何图">' :
+                   '<div class="nofig">📎 格点作图题，图待人工补录</div>') + '</div>';
+      });
+      hh += '</div></section>';
+    });
+    document.getElementById('content').innerHTML = hh;
+  }
 })();
 </script>
 </body>
