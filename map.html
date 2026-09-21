@@ -120,7 +120,8 @@
       h += '<div class="exlesson">' +
         '<h3>' + (i+1) + ' · ' + x.subject + ' · ' + x.from.split(' · ')[1] + '</h3>' +
         '<div class="from">📍 ' + x.from + '</div>' +
-        '<a class="imglink" href="' + x.img + '" target="_blank" title="点击放大看题"><img src="' + x.img + '" alt="例题图"></a>' +
+        '<a class="imglink" href="' + x.stem + '" target="_blank"><img src="' + x.stem + '" alt="题干"></a>' +
+        '<a class="imglink" href="' + x.fig + '" target="_blank"><img src="' + x.fig + '" alt="几何图" style="margin-top:6px;"></a>' +
         '<div class="think-hint">⏱ 题目就在上图（看不清就点图片放大）——先自己想 30 秒，想不到再点下面的拆解</div>' +
         '<details class="step"><summary>🔍 拆解这题（七步）</summary>' +
         '<div class="stp"><b>① 触发词：</b>' + x.steps.trig + '</div>' +
