@@ -12,7 +12,7 @@
 window.EX_LESSONS = [
   { id: "ex1", subject: "数学", from: "核心考点·八上 p74 例1 · 三角形内角和/外角",
     stemText: "如图①，在△ABC 中，∠A=75°，∠B=55°，求 ∠ACB 的度数。<br>延伸（图②）：读图求出 y 的度数。<span style=\"color:#999;font-size:12px;\">（题面按书页原图整理）</span>",
-    fig: "imgs/ex1_fig.png",
+    fig: "imgs/ex1_f2.png",
     steps: {
       trig: "题面里的“求 x°/y°”——三角形里求角，数字们互相有账要算",
       entry: "先数已知角：知道两个 → 第三个 = 180° − 两角之和；求的是外角 → 不相邻两内角之和",
@@ -28,7 +28,7 @@ window.EX_LESSONS = [
     } },
   { id: "ex2", subject: "数学", from: "核心考点·八上 p54 例1 · 全等三角形证明",
     stemText: "如图，在△ABC 中，AB=AC，AD=AE。<br>求证：△ABE≌△ACD。",
-    fig: "imgs/ex2_fig.png",
+    fig: "imgs/ex2_f2.png",
     steps: {
       trig: "题面里的“求证：△___≌△___”",
       entry: "先数手里的条件：图中已给 AB=AC、AD=AE 两组边 → 缺夹角 → 公共角 ∠A 是同一个角（藏在图里的条件）→ SAS",
@@ -44,7 +44,7 @@ window.EX_LESSONS = [
     } },
   { id: "ex3", subject: "数学", from: "核心考点·八上 p84 例1 · 等腰三角形性质",
     stemText: "如图，在△ABC 中，AB=AC，∠BAC=80°，求 ∠B、∠C 的度数（图中 x、y 即两底角）。",
-    fig: "imgs/ex3_fig.png",
+    fig: "imgs/ex3_f2.png",
     steps: {
       trig: "题面里的“AB=AC”＋给了一个角度",
       entry: "等边对等角 → 两底角相等 → 底角 = (180°−顶角)÷2",
@@ -60,7 +60,7 @@ window.EX_LESSONS = [
     } },
   { id: "ex4", subject: "数学", from: "核心考点·八上 p95 例 · 等边三角形与含30°角",
     stemText: "如图，在△ABC 中，∠BAC=90°，D 是 BC 边上一点，△ACD 是等边三角形。<br>求证：∠B=30°。<span style=\"color:#999;font-size:12px;\">（题面按书页原图整理）</span>",
-    fig: "imgs/ex4_fig.png",
+    fig: "imgs/ex4_f2.png",
     steps: {
       trig: "题面里的“等边三角形”＋“中点”或“30°”",
       entry: "等边每边每角都相等 → 中点把大边折半 → 连出含 30° 的直角三角形 → 对边 = 斜边一半",
@@ -76,7 +76,7 @@ window.EX_LESSONS = [
     } },
   { id: "ex5", subject: "数学", from: "核心考点·八上 p101 例 · 最短路径（将军饮马）",
     stemText: "如图，直线 l 的同侧有两点 A、B。请在直线 l 上求作一点 P，使 PA+PB 最小。<br><span style=\"color:#999;font-size:12px;\">图中虚线是书上画的辅助线——先别看它，自己想 30 秒</span>",
-    fig: "imgs/ex5_fig.png",
+    fig: "imgs/ex5_f2.png",
     steps: {
       trig: "题面里的“PA+PB 最小/最短”＋P 在直线 l 上动",
       entry: "化折为直：作 A 关于 l 的对称点 A′（PA=PA′）→ 连 A′B（两点之间线段最短）→ 与 l 的交点就是 P",
@@ -92,7 +92,7 @@ window.EX_LESSONS = [
     } },
   { id: "ex6", subject: "物理", from: "物理大培优·八上 p23 例 · s-t 图像",
     stemText: "图甲、图乙是某物体直线运动的 s-t 图像与 v-t 图像。读图回答：<br>① 各时间段物体分别做什么运动？速度多大？<br>② 全程的平均速度是多少？<span style=\"color:#999;font-size:12px;\">（数据以图中坐标为准）</span>",
-    fig: "imgs/ex6_fig.png",
+    fig: "imgs/ex6_f2.png",
     steps: {
       trig: "题面里的“s-t 图像”＋求速度/平均速度",
       entry: "图像三句话：越陡越快、水平静止、落回横轴=返回出发点；平均速度=总路程÷总时间（休息照算）",
