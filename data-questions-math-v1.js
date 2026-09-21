@@ -2,9 +2,9 @@ window.QBANK = {
 "meta": {
 "total": 682,
 "figured": 682,
-"ok": 417,
-"warn": 107,
-"miss": 55,
+"ok": 459,
+"warn": 115,
+"miss": 5,
 "desc": "《2027版核心考点·人教八上教师用书》全书题目 · 方案三流水线（OCR锚定+投影裁剪+边缘/字母/坐标三道检查）· 生成于 2026-09-21"
 },
 "questions": [
@@ -23,7 +23,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一两边之和大于第三边①-",
 "section": "核心考点一两边之和大于第三边①-",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "02．（2026武珞路中学期中）若三角形的三边长分别是3、5和m，则m的取值范围是_2<m<____",
 "img": "imgs/qbank/qb_p009_02.jpg",
 "stemImg": null
@@ -183,7 +183,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "ok",
 "stem": "05.（2026广州期中）如图，AD，CE为△ABC的高，AB=2，BC=4，则",
 "img": "imgs/qbank/qb_p012_05.jpg",
 "stemImg": null
@@ -193,7 +193,7 @@ window.QBANK = {
 "qid": "06",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "06．（2026蔡甸、黄陂、新洲期中）如图，△ABC是等腰三角形，O是底边BC上任意一点，过O作",
 "img": "imgs/qbank/qb_p012_06.jpg",
 "stemImg": null
@@ -233,7 +233,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一三角形的中线与面积",
 "section": "核心考点一三角形的中线与面积",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "01．如图，△ABC中，点D，E分别为BC，AD的中点，SABC=20，则阴影部分的面积是____",
 "img": "imgs/qbank/qb_p013_01.jpg",
 "stemImg": null
@@ -243,7 +243,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一三角形的中线与面积",
 "section": "核心考点一三角形的中线与面积",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "02.（2025江岸期中）如图，BD是△ABC的AC边上的中线，AE是△ABD的BD边上的中线，BF",
 "img": "imgs/qbank/qb_p013_02.jpg",
 "stemImg": null
@@ -253,7 +253,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一三角形的中线与面积",
 "section": "核心考点一三角形的中线与面积",
-"status": "warn_edge",
+"status": "ok",
 "stem": "03.如图，AD是△ABC的中线，BE是△ABD的中线，EF⊥BC于点F.若SABC=24，BD=4，则EF=",
 "img": "imgs/qbank/qb_p013_03.jpg",
 "stemImg": null
@@ -263,7 +263,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一三角形的中线与面积",
 "section": "核心考点一三角形的中线与面积",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "04．如图，△ABC中，AD为中线，AB=8，AC=6，则△ABD与△ACD的周长之差是____",
 "img": "imgs/qbank/qb_p013_04.jpg",
 "stemImg": null
@@ -273,7 +273,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "核心考点一三角形的中线与面积",
 "section": "核心考点一三角形的中线与面积",
-"status": "warn_edge",
+"status": "ok",
 "stem": "05．如图，在△ABC中，AB=10，AC=6，D是BC的中点，点E在边AB上，△BDE与四边形ACDE",
 "img": "imgs/qbank/qb_p013_05.jpg",
 "stemImg": null
@@ -373,7 +373,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一三角形的内角",
 "section": "核心考点一三角形的内角",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "01．如图，在△ABC中，点D，E分别在BC，AC上，B=____°，C=____°，若DE//AB，则AED=",
 "img": "imgs/qbank/qb_p016_01.jpg",
 "stemImg": null
@@ -383,7 +383,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一三角形的内角",
 "section": "核心考点一三角形的内角",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "02.（2026汉阳期中）如图，△ABC中D，E为AB，AC上的两点，若1+2+3+Z4=____°，则",
 "img": "imgs/qbank/qb_p016_02.jpg",
 "stemImg": null
@@ -393,7 +393,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一三角形的内角",
 "section": "核心考点一三角形的内角",
-"status": "warn_edge",
+"status": "ok",
 "stem": "03.（2026福州延安中学月考）如图，1+2+Z3+4+5=____",
 "img": "imgs/qbank/qb_p016_03.jpg",
 "stemImg": null
@@ -403,7 +403,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一三角形的内角",
 "section": "核心考点一三角形的内角",
-"status": "miss_fig",
+"status": "ok",
 "stem": "04.如图，在△ABC中，CD平分ACB交AB于点D，过点D作DE//BC交AC于点E.若∠A=____°，",
 "img": "imgs/qbank/qb_p016_04.jpg",
 "stemImg": null
@@ -413,7 +413,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "核心考点一三角形的内角",
 "section": "核心考点一三角形的内角",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "05.如图，在△ABC中，ABC=ACB，点P为△ABC内一点，且PBC=PCA，A=α，求BPC",
 "img": "imgs/qbank/qb_p016_05.jpg",
 "stemImg": null
@@ -423,7 +423,7 @@ window.QBANK = {
 "qid": "06",
 "chapter": "核心考点一三角形的内角",
 "section": "核心考点一三角形的内角",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "06.△ABC中，BD平分ZABC，CE平分ACB，BD与CE交于点M.",
 "img": "imgs/qbank/qb_p016_06.jpg",
 "stemImg": null
@@ -433,7 +433,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一三角形的外角",
 "section": "核心考点一三角形的外角",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "01．如图，在△ABC中，A=____°，ACD是△ABC的外角．若ACD=____°，则B=____°",
 "img": "imgs/qbank/qb_p017_01.jpg",
 "stemImg": null
@@ -443,7 +443,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一三角形的外角",
 "section": "核心考点一三角形的外角",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "02.如图，在△ABC中，D为BC边上一点，B=1，BAC=____°，则2=____°",
 "img": "imgs/qbank/qb_p017_02.jpg",
 "stemImg": null
@@ -453,7 +453,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一三角形的外角",
 "section": "核心考点一三角形的外角",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "03.如图，AD是CAE的角平分线，B=____°，DAE=____°，则ACD=____°",
 "img": "imgs/qbank/qb_p017_03.jpg",
 "stemImg": null
@@ -463,7 +463,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一三角形的外角",
 "section": "核心考点一三角形的外角",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "04.如图，在△ABC中，D为BC延长线上一点，DE⊥AB于E，交AC于F，若A=____°，<D=____°，",
 "img": "imgs/qbank/qb_p017_04.jpg",
 "stemImg": null
@@ -493,7 +493,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一直角三角形的两锐角互余",
 "section": "核心考点一直角三角形的两锐角互余",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "01．如图，Rt△ABC，ACB=____°，CD⊥AB于D，BCD=____°，则A=____°.",
 "img": "imgs/qbank/qb_p018_01.jpg",
 "stemImg": null
@@ -503,7 +503,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一直角三角形的两锐角互余",
 "section": "核心考点一直角三角形的两锐角互余",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "02.如图，△ABC中，<C=____°，点E，D分别在边AC，AB上，若1=ZB，则EDB=____",
 "img": "imgs/qbank/qb_p018_02.jpg",
 "stemImg": null
@@ -513,7 +513,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一直角三角形的两锐角互余",
 "section": "核心考点一直角三角形的两锐角互余",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "03．（2026东湖期中）一副三角板按如图所示叠放在一起，则图中乙α的度数是____°",
 "img": "imgs/qbank/qb_p018_03.jpg",
 "stemImg": null
@@ -523,7 +523,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一直角三角形的两锐角互余",
 "section": "核心考点一直角三角形的两锐角互余",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "04．如图，在锐角△ABC中，CD，BE分别是AB，AC边上的高，CD，BE交于点P，A=____°，则",
 "img": "imgs/qbank/qb_p018_04.jpg",
 "stemImg": null
@@ -563,7 +563,7 @@ window.QBANK = {
 "qid": "08",
 "chapter": "核心考点一直角三角形的两锐角互余",
 "section": "核心考点一直角三角形的两锐角互余",
-"status": "warn_edge+prose",
+"status": "ok",
 "stem": "08.（2026湖南师大附中月考）在下列条件中：①A+∠B=ZC；②A：ZB：<C=3：7：4；",
 "img": "imgs/qbank/qb_p018_08.jpg",
 "stemImg": null
@@ -623,7 +623,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一认识模型",
 "section": "核心考点一认识模型",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．如图，点P是△ABC两条内角平分线的交点，求证：ZP=____°+",
 "img": "imgs/qbank/qb_p020_01.jpg",
 "stemImg": null
@@ -693,7 +693,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一认识内外角平分线模型",
 "section": "核心考点一认识内外角平分线模型",
-"status": "warn_edge",
+"status": "ok",
 "stem": "01．如图，点D是BC延长线上一点，PB平分乙ABC，PC平分ACD．求证：<P=",
 "img": "imgs/qbank/qb_p022_01.jpg",
 "stemImg": null
@@ -783,7 +783,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一认识模型",
 "section": "核心考点一认识模型",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "03．在社会实践手工课上，小茗同学设计了一个形状如图所示的零件，如果之A=____°，<B=____°，",
 "img": "imgs/qbank/qb_p024_03.jpg",
 "stemImg": null
@@ -803,7 +803,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "核心考点一认识模型",
 "section": "核心考点一认识模型",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "05.（2026武珞路中学期中）如图，CGE=____°，A+ZB+C+ZD+ZE+F=____",
 "img": "imgs/qbank/qb_p024_05.jpg",
 "stemImg": null
@@ -813,7 +813,7 @@ window.QBANK = {
 "qid": "06",
 "chapter": "核心考点一认识模型",
 "section": "核心考点一认识模型",
-"status": "warn_edge",
+"status": "ok",
 "stem": "06．如图，ABD，ACD的角平分线交于点P，若A=____°，<D=____°，则P=____",
 "img": "imgs/qbank/qb_p024_06.jpg",
 "stemImg": null
@@ -933,7 +933,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026汉阳期末）用悬挂法可以确定三角形匀质薄板的重心.",
 "img": "imgs/qbank/qb_p028_01.jpg",
 "stemImg": null
@@ -1033,7 +1033,7 @@ window.QBANK = {
 "qid": "11",
 "chapter": "其他",
 "section": "",
-"status": "warn_prose",
+"status": "ok",
 "stem": "11．如果△ABC的三边长分别为3，5，7，△DEF的三边长分别为3，3x-2，2y-1，若这两个三角形",
 "img": "imgs/qbank/qb_p030_11.jpg",
 "stemImg": null
@@ -1353,7 +1353,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一全等三角形的个数——从基本图形",
 "section": "核心考点一全等三角形的个数——从基本图形到组合图形",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "01．如图，已知CD⊥AB于点D，BE⊥AC于点E，CD，BE交于点O，且AO平分ZBAC，则图中的",
 "img": "imgs/qbank/qb_p037_01.jpg",
 "stemImg": null
@@ -1363,7 +1363,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一全等三角形的个数——从基本图形",
 "section": "核心考点一全等三角形的个数——从基本图形到组合图形",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "02．如图，已知AB//CD，AC//DB，AD与BC交于O，AE⊥BC于E，DF⊥BC于F，那么图中全等",
 "img": "imgs/qbank/qb_p037_02.jpg",
 "stemImg": null
@@ -1373,7 +1373,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一全等三角形的个数——从基本图形",
 "section": "核心考点一全等三角形的个数——从基本图形到组合图形",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "03．（2026长郡中学月考）如图，3x4的网格中，△ABC的三个顶点均在格点上，这样的三角形叫格",
 "img": "imgs/qbank/qb_p037_03.jpg",
 "stemImg": null
@@ -1383,7 +1383,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一全等三角形的个数——从基本图形",
 "section": "核心考点一全等三角形的个数——从基本图形到组合图形",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "04.（2026江岸期中）如图，在△ABC中，AB=BC=3，<ABC=____°，点D在直线BC上，CD=4，",
 "img": "imgs/qbank/qb_p037_04.jpg",
 "stemImg": null
@@ -1483,7 +1483,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一遇线段和差，证全等后等线段代换",
 "section": "核心考点一遇线段和差，证全等后等线段代换",
-"status": "warn_edge",
+"status": "ok",
 "stem": "01．如图，△ABC中，BAC=____°，AB=AC，直线AE是过点A的一条直线，且点B，C在AE的同",
 "img": "imgs/qbank/qb_p040_01.jpg",
 "stemImg": null
@@ -1523,7 +1523,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点二作垂构造与线段转化",
 "section": "核心考点二作垂构造与线段转化",
-"status": "warn_edge",
+"status": "ok",
 "stem": "03．如图，BD平分ABC，DE⊥BC于点E，AB=7，DE=4，则△ABD的面积为____",
 "img": "imgs/qbank/qb_p041_03.jpg",
 "stemImg": null
@@ -1643,7 +1643,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．如图，在四边形ABCD中，ABC+ZADC=____°，BD平分ABC．求证：AD=CD.",
 "img": "imgs/qbank/qb_p045_01.jpg",
 "stemImg": null
@@ -1673,7 +1673,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "04.（2026东西湖期中）（____）问题背景：如图1，已知三角形内角和为____°，连接BD得到△ABD和",
 "img": "imgs/qbank/qb_p045_04.jpg",
 "stemImg": null
@@ -1753,7 +1753,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一认识与证明结论 (课本作业题)",
 "section": "核心考点一认识与证明结论 (课本作业题)",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．已知△ABC，AD是之BAC的角平分线，求证：",
 "img": "imgs/qbank/qb_p048_01.jpg",
 "stemImg": null
@@ -1833,7 +1833,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一对边边角结构的初步认识",
 "section": "核心考点一对边边角结构的初步认识",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．【教材呈现】如图为人教版八年级上册数学教材第39页的部分内容.",
 "img": "imgs/qbank/qb_p050_01.jpg",
 "stemImg": null
@@ -2003,7 +2003,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一内三垂的认识与应用",
 "section": "核心考点一内三垂的认识与应用",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "02.（____）如图1，<B=ZCAD=ZE=____°，AC=AD，点A，B，E在一条直线上，求证：BE=BC+DE;",
 "img": "imgs/qbank/qb_p055_02.jpg",
 "stemImg": null
@@ -2183,7 +2183,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "核心考点三遇等腰三角形构造手拉手①一遇4",
 "section": "核心考点三遇等腰三角形构造手拉手①一遇45°直接构造等腰直角",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "05．如图1，在△ABC中，<ACB为锐角，点D为射线BC上一动点，连接AD，以AD为一边且在",
 "img": "imgs/qbank/qb_p060_05.jpg",
 "stemImg": null
@@ -2373,7 +2373,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一利用全等画中点",
 "section": "核心考点一利用全等画中点",
-"status": "miss_fig",
+"status": "ok",
 "stem": "01．如图，△ABC的三个顶点都是格点，仅用无刻度的直尺画△ABC的中线AD，BE.",
 "img": "imgs/qbank/qb_p068_01.jpg",
 "stemImg": null
@@ -2383,7 +2383,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一利用全等画中点",
 "section": "核心考点一利用全等画中点",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "02.（2026武汉二中月考）如图，C是网格线上的点，先画CE//AB且CE=AB，再画AC的中点P.",
 "img": "imgs/qbank/qb_p068_02.jpg",
 "stemImg": null
@@ -2403,7 +2403,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一利用全等画中点",
 "section": "核心考点一利用全等画中点",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "04．（2026东西湖期中）如图，点A，B，C均为格点，仅用无刻度的直尺画图，作图过程不超过3条",
 "img": "imgs/qbank/qb_p068_04.jpg",
 "stemImg": null
@@ -2413,7 +2413,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "核心考点一利用全等画中点",
 "section": "核心考点一利用全等画中点",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "05.（2026汉阳期末）如图，A，B，C均为格点，先画BC中点D，再画△ABC的重心E.",
 "img": "imgs/qbank/qb_p068_05.jpg",
 "stemImg": null
@@ -2423,7 +2423,7 @@ window.QBANK = {
 "qid": "06",
 "chapter": "核心考点一利用全等画中点",
 "section": "核心考点一利用全等画中点",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "06．（2026武珞路中学月考）如图，△ABC的三个顶点都是格点，仅用无刻度的直尺画一条直线1，",
 "img": "imgs/qbank/qb_p068_06.jpg",
 "stemImg": null
@@ -2433,7 +2433,7 @@ window.QBANK = {
 "qid": "07",
 "chapter": "核心考点一利用全等画中点",
 "section": "核心考点一利用全等画中点",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "07．（2026武汉一初月考）如图，△ABC三个顶点都是格点，画射线AD交BC于点D，使AD平分",
 "img": "imgs/qbank/qb_p068_07.jpg",
 "stemImg": null
@@ -2443,7 +2443,7 @@ window.QBANK = {
 "qid": "08",
 "chapter": "核心考点一利用全等画中点",
 "section": "核心考点一利用全等画中点",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "08．（2026武汉二中月考）如图，A，B，C均为格点，F是线段BC上的格点，在线段AB上画点H,",
 "img": "imgs/qbank/qb_p068_08.jpg",
 "stemImg": null
@@ -2453,7 +2453,7 @@ window.QBANK = {
 "qid": "09",
 "chapter": "核心考点一利用全等画中点",
 "section": "核心考点一利用全等画中点",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "09．（2026武汉三寄月考）如图，△ABC的三个顶点都是格点，N是BC与网格线的交点，仅用无刻",
 "img": "imgs/qbank/qb_p068_09.jpg",
 "stemImg": null
@@ -2463,7 +2463,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一利用全等画高与垂线",
 "section": "核心考点一利用全等画高与垂线",
-"status": "miss_fig",
+"status": "ok",
 "stem": "01．如图，先画AF⊥AB，且AF=AB，再过点D画DG⊥AB于点G.",
 "img": "imgs/qbank/qb_p069_01.jpg",
 "stemImg": null
@@ -2483,7 +2483,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一利用全等画高与垂线",
 "section": "核心考点一利用全等画高与垂线",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "03．如图，A，B，O均为格点，△ABO的高线AQ（画图过程用虚线表示，画图结果用实线表示）.",
 "img": "imgs/qbank/qb_p069_03.jpg",
 "stemImg": null
@@ -2493,7 +2493,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一利用全等画高与垂线",
 "section": "核心考点一利用全等画高与垂线",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "04．（2026洪山期中）如图，△ABC中，A为格线上的点，B，C两点为格点，AC=BC，作BH⊥AC",
 "img": "imgs/qbank/qb_p069_04.jpg",
 "stemImg": null
@@ -2503,7 +2503,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "核心考点一利用全等画高与垂线",
 "section": "核心考点一利用全等画高与垂线",
-"status": "miss_fig",
+"status": "ok",
 "stem": "05．（2026武汉二中月考）如图，A，B，C均为格点，仅用无刻度的直尺画AB边上的高CH.",
 "img": "imgs/qbank/qb_p069_05.jpg",
 "stemImg": null
@@ -2523,7 +2523,7 @@ window.QBANK = {
 "qid": "07",
 "chapter": "核心考点一利用全等画高与垂线",
 "section": "核心考点一利用全等画高与垂线",
-"status": "miss_fig",
+"status": "ok",
 "stem": "07．如图，A，B，C均为格点，在BC上画点D，使得CAD=ZABC.",
 "img": "imgs/qbank/qb_p069_07.jpg",
 "stemImg": null
@@ -2533,7 +2533,7 @@ window.QBANK = {
 "qid": "08",
 "chapter": "核心考点一利用全等画高与垂线",
 "section": "核心考点一利用全等画高与垂线",
-"status": "miss_fig",
+"status": "ok",
 "stem": "08．如图，A，B均为格点，点P为格线上一点，过点P画PE⊥AB，垂足为E.",
 "img": "imgs/qbank/qb_p069_08.jpg",
 "stemImg": null
@@ -2553,7 +2553,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一直接平移得平行",
 "section": "核心考点一直接平移得平行",
-"status": "miss_fig",
+"status": "ok",
 "stem": "01．如图，A，B，D都是格点，仅用无刻度的直尺在AC上画点N，使ND//AB.",
 "img": "imgs/qbank/qb_p070_01.jpg",
 "stemImg": null
@@ -2573,7 +2573,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一直接平移得平行",
 "section": "核心考点一直接平移得平行",
-"status": "miss_fig",
+"status": "ok",
 "stem": "03．（2026黄陂期中）如图，△ABC的三个顶点都是格点．先画格点D，连接CD，使CD//AB；再",
 "img": "imgs/qbank/qb_p070_03.jpg",
 "stemImg": null
@@ -2583,7 +2583,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一直接平移得平行",
 "section": "核心考点一直接平移得平行",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "04．（2026武汉二中月考）如图，A，B是格点，C是网格线上的点．仅用无刻度的直尺先画出BC的",
 "img": "imgs/qbank/qb_p070_04.jpg",
 "stemImg": null
@@ -2603,7 +2603,7 @@ window.QBANK = {
 "qid": "06",
 "chapter": "核心考点一直接平移得平行",
 "section": "核心考点一直接平移得平行",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "06．（2026武珞路中学月考）如图，A，B，C三点都是格点，点E为线段AB与网格线的交点，过点",
 "img": "imgs/qbank/qb_p070_06.jpg",
 "stemImg": null
@@ -2613,7 +2613,7 @@ window.QBANK = {
 "qid": "07",
 "chapter": "核心考点一直接平移得平行",
 "section": "核心考点一直接平移得平行",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "07.（2026七一中学月考）如图，A，B，C三点都是格点，点P是BC与网格线的交点，先将线段AB",
 "img": "imgs/qbank/qb_p070_07.jpg",
 "stemImg": null
@@ -2633,7 +2633,7 @@ window.QBANK = {
 "qid": "09",
 "chapter": "核心考点一直接平移得平行",
 "section": "核心考点一直接平移得平行",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "09.（2026硚口期末）如图，△ABC的顶点A，C是格点，点B在网格线上（非格点）．先画线段CF",
 "img": "imgs/qbank/qb_p070_09.jpg",
 "stemImg": null
@@ -2643,7 +2643,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一作全等①—利用SSS构造全等三",
 "section": "核心考点一作全等①—利用SSS构造全等三角形",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "01．如图，△ABC的三个顶点A，B，C均在格点上，在图中取格点P，使得△BPC△CAB（P不与",
 "img": "imgs/qbank/qb_p071_01.jpg",
 "stemImg": null
@@ -2663,7 +2663,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一作全等①—利用SSS构造全等三",
 "section": "核心考点一作全等①—利用SSS构造全等三角形",
-"status": "miss_fig",
+"status": "ok",
 "stem": "03.（2026黄陂期中）如图，△ABC的三个顶点都是格点．先画△ABC的高线CF；再画点G，使点",
 "img": "imgs/qbank/qb_p071_03.jpg",
 "stemImg": null
@@ -2683,7 +2683,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "核心考点一作全等①—利用SSS构造全等三",
 "section": "核心考点一作全等①—利用SSS构造全等三角形",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "05．如图，A，B，C，O四点都是格点，在边AB上画点F，使得△ACF△ABE.",
 "img": "imgs/qbank/qb_p071_05.jpg",
 "stemImg": null
@@ -2693,7 +2693,7 @@ window.QBANK = {
 "qid": "06",
 "chapter": "核心考点一作全等①—利用SSS构造全等三",
 "section": "核心考点一作全等①—利用SSS构造全等三角形",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "06．（2026青山期末）如图，△ABC的三个顶点都是格点，且AB=5.",
 "img": "imgs/qbank/qb_p071_06.jpg",
 "stemImg": null
@@ -2803,7 +2803,7 @@ window.QBANK = {
 "qid": "06",
 "chapter": "核心考点一对称的性质①-",
 "section": "核心考点一对称的性质①-",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "06．在如图所示3x3的正方形网格中，有三个小方格被涂上了阴影，请在图中再选择两个空白的小正",
 "img": "imgs/qbank/qb_p073_06.jpg",
 "stemImg": null
@@ -3313,7 +3313,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "ok",
 "stem": "03.（2025武珞路中学期中）已知点P是等边△ABC所在平面内的一个点，满足△PAB，△PBC，△PAC",
 "img": "imgs/qbank/qb_p086_03.jpg",
 "stemImg": null
@@ -3323,7 +3323,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "其他",
 "section": "",
-"status": "warn_prose",
+"status": "ok",
 "stem": "04．如图，B是直线I上的一点，线段AB与1的夹角为α（____°<α<____°），点C在l上，若以A，B,",
 "img": "imgs/qbank/qb_p086_04.jpg",
 "stemImg": null
@@ -3463,7 +3463,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一二倍角与角平分线",
 "section": "核心考点一二倍角与角平分线",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "02.如图，CD是△ABC的高，且BD=AC+AD，若B=____°，则A=____°",
 "img": "imgs/qbank/qb_p090_02.jpg",
 "stemImg": null
@@ -3483,7 +3483,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一二倍角与角平分线",
 "section": "核心考点一二倍角与角平分线",
-"status": "miss_fig",
+"status": "ok",
 "stem": "04.如图，在四边形ABCD中，AC，BD相交于点E.若E为BD的中点，ZBAC=2∠ACD，AE=2，",
 "img": "imgs/qbank/qb_p090_04.jpg",
 "stemImg": null
@@ -3893,7 +3893,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一等边三角形的判定①——市",
 "section": "核心考点一等边三角形的判定①——市",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "04．如图，一个六边形的每个内角都是____°，连续四边的长依次是2.7，3，",
 "img": "imgs/qbank/qb_p102_04.jpg",
 "stemImg": null
@@ -3913,7 +3913,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一直接运用定理",
 "section": "核心考点一直接运用定理",
-"status": "warn_edge",
+"status": "ok",
 "stem": "01．如图，Rt△ABC中，ACB=____°，CD⊥AB，若A=____°，BD=1，则AD的长为____",
 "img": "imgs/qbank/qb_p103_01.jpg",
 "stemImg": null
@@ -4153,7 +4153,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一认识模型",
 "section": "核心考点一认识模型",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "02．如图，在等边△ABC中，AE=CD，AD，BE交于P点，BQ⊥AD于Q.",
 "img": "imgs/qbank/qb_p108_02.jpg",
 "stemImg": null
@@ -4223,7 +4223,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "专题三十五三等腰基本图的处理（2）",
 "section": "专题三十五三等腰基本图的处理（2）",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "02.如图，P是△ABC内一点，PB=PC，BPC=____°，ZBAC=____°，求证：PA=PB.",
 "img": "imgs/qbank/qb_p110_02.jpg",
 "stemImg": null
@@ -4253,7 +4253,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一作垂直平分线",
 "section": "核心考点一作垂直平分线",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "01．如图，点A，B在格点上，仅用无刻度的直尺画AB的垂直平分线，",
 "img": "imgs/qbank/qb_p111_01.jpg",
 "stemImg": null
@@ -4283,7 +4283,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一作垂直平分线",
 "section": "核心考点一作垂直平分线",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "04．（2026武汉二中月考）如图，点P是线段AB上一点．作出P点关于BC的对称点Q.",
 "img": "imgs/qbank/qb_p111_04.jpg",
 "stemImg": null
@@ -4293,7 +4293,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "核心考点一作垂直平分线",
 "section": "核心考点一作垂直平分线",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "05．（2026武昌期中）如图，A，B，C均为格点，M是AB上一点，先画△ABC的角平分线BG，再",
 "img": "imgs/qbank/qb_p111_05.jpg",
 "stemImg": null
@@ -4303,7 +4303,7 @@ window.QBANK = {
 "qid": "06",
 "chapter": "核心考点一作垂直平分线",
 "section": "核心考点一作垂直平分线",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "06．（2026江岸期中）如图，A，B，C均为格点，P是BC上一点，画射线CQ，使得CA为BCQ的",
 "img": "imgs/qbank/qb_p111_06.jpg",
 "stemImg": null
@@ -4313,7 +4313,7 @@ window.QBANK = {
 "qid": "07",
 "chapter": "核心考点一作垂直平分线",
 "section": "核心考点一作垂直平分线",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "07．（2025黄陂期末）如图，先画△ABC的高AE，再画点E关于AB的对称点G.",
 "img": "imgs/qbank/qb_p111_07.jpg",
 "stemImg": null
@@ -4343,7 +4343,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一用对称作平行线一利用平行得等腰",
 "section": "核心考点一用对称作平行线一利用平行得等腰",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "01．如图，A，B，C都是格点，P是边AB上任意一点，在线段AC上取一点Q，使得PQ/BC.",
 "img": "imgs/qbank/qb_p112_01.jpg",
 "stemImg": null
@@ -4353,7 +4353,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一用对称作平行线一利用平行得等腰",
 "section": "核心考点一用对称作平行线一利用平行得等腰",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "02．如图，D是边AB上一点，先画线段AM，使得AM=AB，且AMLAB；再在AM画一点N，使",
 "img": "imgs/qbank/qb_p112_02.jpg",
 "stemImg": null
@@ -4363,7 +4363,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一用对称作平行线一利用平行得等腰",
 "section": "核心考点一用对称作平行线一利用平行得等腰",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "03.（2026江岸期末）如图，A，B，C为格点，仅用无刻度的直尺在线段AB上画一点M，使得ACM=____°，",
 "img": "imgs/qbank/qb_p112_03.jpg",
 "stemImg": null
@@ -4373,7 +4373,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一用对称作平行线一利用平行得等腰",
 "section": "核心考点一用对称作平行线一利用平行得等腰",
-"status": "miss_fig",
+"status": "ok",
 "stem": "04.如图，A，B，C，D都是格点，在CD上画点P，使得APC=ZBPD.",
 "img": "imgs/qbank/qb_p112_04.jpg",
 "stemImg": null
@@ -4383,7 +4383,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "核心考点一用对称作平行线一利用平行得等腰",
 "section": "核心考点一用对称作平行线一利用平行得等腰",
-"status": "miss_fig",
+"status": "ok",
 "stem": "05．（2024江汉期末）如图，A，B，C都是格点，点D是AB与网格线的交点．在边AC上画点P,",
 "img": "imgs/qbank/qb_p112_05.jpg",
 "stemImg": null
@@ -4403,7 +4403,7 @@ window.QBANK = {
 "qid": "07",
 "chapter": "核心考点一用对称作平行线一利用平行得等腰",
 "section": "核心考点一用对称作平行线一利用平行得等腰",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "07．（2025武汉外校期中）如图，△ABC的三个顶点都是格点．点D是边AC与网格线的交点，先画",
 "img": "imgs/qbank/qb_p112_07.jpg",
 "stemImg": null
@@ -4433,7 +4433,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一作角平分线—利用三线合一",
 "section": "核心考点一作角平分线—利用三线合一",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "01．如图，点A，B，C在格点上，其中AB=5．作△ABC的角平分线AF.",
 "img": "imgs/qbank/qb_p113_01.jpg",
 "stemImg": null
@@ -4443,7 +4443,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一作角平分线—利用三线合一",
 "section": "核心考点一作角平分线—利用三线合一",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "02.（2025东西湖期末）如图，A，B，C都是格点，BC=5，在△ABC内部画一个点P，使BPC=____°.",
 "img": "imgs/qbank/qb_p113_02.jpg",
 "stemImg": null
@@ -4453,7 +4453,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一作角平分线—利用三线合一",
 "section": "核心考点一作角平分线—利用三线合一",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "03．如图，A，B，C均为格点．已知AB=5，在AB上作点M，使得B=2∠ACM.",
 "img": "imgs/qbank/qb_p113_03.jpg",
 "stemImg": null
@@ -4463,7 +4463,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一作角平分线—利用三线合一",
 "section": "核心考点一作角平分线—利用三线合一",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "04．如图，△ABC的三个顶点都是格点，且AB=5．先找格点D，使AD⊥AB，再作△EBF△ABC，",
 "img": "imgs/qbank/qb_p113_04.jpg",
 "stemImg": null
@@ -4473,7 +4473,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "核心考点一作角平分线—利用三线合一",
 "section": "核心考点一作角平分线—利用三线合一",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "05．如图，△ABC的三个顶点均在格点上，且AB=5.",
 "img": "imgs/qbank/qb_p113_05.jpg",
 "stemImg": null
@@ -4483,7 +4483,7 @@ window.QBANK = {
 "qid": "06",
 "chapter": "核心考点一作角平分线—利用三线合一",
 "section": "核心考点一作角平分线—利用三线合一",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "06．如图，点A，B，C均为格点，且AB=5，在AB上画点M，使BM=BC.",
 "img": "imgs/qbank/qb_p113_06.jpg",
 "stemImg": null
@@ -4493,7 +4493,7 @@ window.QBANK = {
 "qid": "07",
 "chapter": "核心考点一作角平分线—利用三线合一",
 "section": "核心考点一作角平分线—利用三线合一",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "07．如图，△ABC的三个顶点均在格点上，AB=5．在格点上找点F，使AF⊥AB且AF=AB，再在直",
 "img": "imgs/qbank/qb_p113_07.jpg",
 "stemImg": null
@@ -4513,7 +4513,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一将军饮马，转化折线段为“两点之",
 "section": "核心考点一将军饮马，转化折线段为“两点之间，线段最短”",
-"status": "miss_fig",
+"status": "ok",
 "stem": "01．如图，点A，B，M，N都在格点上，在MN上画点P，使得PA+PB最小.",
 "img": "imgs/qbank/qb_p114_01.jpg",
 "stemImg": null
@@ -4533,7 +4533,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一将军饮马，转化折线段为“两点之",
 "section": "核心考点一将军饮马，转化折线段为“两点之间，线段最短”",
-"status": "miss_fig",
+"status": "ok",
 "stem": "03．（2026七一中学月考）如图，A，B，C，M都是格点．P是边AB上任意一点，在AC上画一点E，",
 "img": "imgs/qbank/qb_p114_03.jpg",
 "stemImg": null
@@ -4543,7 +4543,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一将军饮马，转化折线段为“两点之",
 "section": "核心考点一将军饮马，转化折线段为“两点之间，线段最短”",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "04.如图，A，B是格点，在直线I上画出一条1个单位长度的线段MN（点M在点N上方），使AM+NB",
 "img": "imgs/qbank/qb_p114_04.jpg",
 "stemImg": null
@@ -4563,7 +4563,7 @@ window.QBANK = {
 "qid": "06",
 "chapter": "核心考点一将军饮马，转化折线段为“两点之",
 "section": "核心考点一将军饮马，转化折线段为“两点之间，线段最短”",
-"status": "miss_fig",
+"status": "warn_partial",
 "stem": "06．（2026黄陂、新洲、蔡甸期末）如图，已知A，B，C均为格点，仅用无刻度的直尺先画CE上AB，",
 "img": "imgs/qbank/qb_p114_06.jpg",
 "stemImg": null
@@ -4573,7 +4573,7 @@ window.QBANK = {
 "qid": "07",
 "chapter": "核心考点一将军饮马，转化折线段为“两点之",
 "section": "核心考点一将军饮马，转化折线段为“两点之间，线段最短”",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "07．（2026东湖期末）如图，△ABC的三个顶点都是格点，仅用无刻度的直尺画图.",
 "img": "imgs/qbank/qb_p114_07.jpg",
 "stemImg": null
@@ -4673,7 +4673,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一化成同“底”，进行幂的运算",
 "section": "核心考点一化成同“底”，进行幂的运算",
-"status": "warn_edge",
+"status": "ok",
 "stem": "04.已知____m÷2\"=8，（2\")____。2\"=32.",
 "img": "imgs/qbank/qb_p116_04.jpg",
 "stemImg": null
@@ -4843,7 +4843,7 @@ window.QBANK = {
 "qid": "06",
 "chapter": "核心考点一恒等问题—多项式相乘展开后与对",
 "section": "核心考点一恒等问题—多项式相乘展开后与对比系数",
-"status": "warn_prose",
+"status": "ok",
 "stem": "06．已知，若多项式x4+3x²+8x²-kx+12被x+3整除，说明x+3=0时，多项式的值为0，即当x=-3时，",
 "img": "imgs/qbank/qb_p118_06.jpg",
 "stemImg": null
@@ -4853,7 +4853,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一整式的运算与图形",
 "section": "核心考点一整式的运算与图形",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．如图，一块直径为a+b的圆形钢板，从中挖去直径分别为a与b的两个圆．若a+b=4，a²+b²=10，",
 "img": "imgs/qbank/qb_p119_01.jpg",
 "stemImg": null
@@ -4863,7 +4863,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一整式的运算与图形",
 "section": "核心考点一整式的运算与图形",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "03．（2026绵阳期末）如图，圆圆同学画了三个面积相等的大正方形和三个面积相等小正方形（两个",
 "img": "imgs/qbank/qb_p119_03.jpg",
 "stemImg": null
@@ -4913,7 +4913,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge+prose",
+"status": "warn_partial",
 "stem": "03．阅读材料：已知实数m，n满足(____m²+n²)(____m²+n²+2)=80，试求____m²+n2的值.",
 "img": "imgs/qbank/qb_p121_03.jpg",
 "stemImg": null
@@ -4953,7 +4953,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一由图形辨别是否能验证平方差公式",
 "section": "核心考点一由图形辨别是否能验证平方差公式",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "02．（2026长沙一中月考）如图，大正方形与小正方形的面积之差是48，则阴影部分的面积是____",
 "img": "imgs/qbank/qb_p122_02.jpg",
 "stemImg": null
@@ -5123,7 +5123,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一完全平方公式与面积①——已知a",
 "section": "核心考点一完全平方公式与面积①——已知a²+b²和a+b，求",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "03．（2026七一中学月考）问题呈现：借助几何直观探究数量关系，是数形结合的常见方法，图1，",
 "img": "imgs/qbank/qb_p126_03.jpg",
 "stemImg": null
@@ -5183,7 +5183,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一配方构造完全平方式",
 "section": "核心考点一配方构造完全平方式",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．将二次三项式x²-4x+3进行配方，正确的结果是（B）",
 "img": "imgs/qbank/qb_p128_01.jpg",
 "stemImg": null
@@ -5243,7 +5243,7 @@ window.QBANK = {
 "qid": "07",
 "chapter": "核心考点一配方构造完全平方式",
 "section": "核心考点一配方构造完全平方式",
-"status": "warn_edge",
+"status": "ok",
 "stem": "07．我们已学习了完全平方公式：a²±2ab+b²=(a±b)²，观察下列式子：",
 "img": "imgs/qbank/qb_p128_07.jpg",
 "stemImg": null
@@ -5273,7 +5273,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一恒等式与特征值",
 "section": "核心考点一恒等式与特征值",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "03．我国古代数学的许多发现都曾位居世界前列，其中“杨辉三角”（如下图所示）就是一例.",
 "img": "imgs/qbank/qb_p129_03.jpg",
 "stemImg": null
@@ -5313,7 +5313,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一因式分解的定义",
 "section": "核心考点一因式分解的定义",
-"status": "warn_edge+prose",
+"status": "warn_partial",
 "stem": "01．下列各式从左到右的变形，是因式分解的是（C",
 "img": "imgs/qbank/qb_p131_01.jpg",
 "stemImg": null
@@ -5353,7 +5353,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点三分组分解法的应用",
 "section": "核心考点三分组分解法的应用",
-"status": "warn_edge",
+"status": "ok",
 "stem": "03.（____）若x²+4x+4-y²=18，x+y=4，则x-y=____",
 "img": "imgs/qbank/qb_p134_03.jpg",
 "stemImg": null
@@ -5363,7 +5363,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点三分组分解法的应用",
 "section": "核心考点三分组分解法的应用",
-"status": "warn_edge+prose",
+"status": "warn_partial",
 "stem": "04.（____）填空：x²-xy+5x-5y=(x²-xy)+(5x-5y)=x(x-y)+5(x-y)=_(x-y)(x+____）",
 "img": "imgs/qbank/qb_p134_04.jpg",
 "stemImg": null
@@ -5383,7 +5383,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一换元法",
 "section": "核心考点一换元法",
-"status": "warn_edge+prose",
+"status": "warn_partial",
 "stem": "03.对于多项式x3-5x²+x+10，我们把x=2代入此多项式，发现x=2能使多项式x3-5x²+x+10的值为0，",
 "img": "imgs/qbank/qb_p136_03.jpg",
 "stemImg": null
@@ -5543,7 +5543,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一判断三角形的形状",
 "section": "核心考点一判断三角形的形状",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "03．（2026泉州期中）若一个正整数能表示为两个连续奇数的平方差，则称这个正整数为“双奇差",
 "img": "imgs/qbank/qb_p139_03.jpg",
 "stemImg": null
@@ -5553,7 +5553,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一判断三角形的形状",
 "section": "核心考点一判断三角形的形状",
-"status": "warn_prose",
+"status": "ok",
 "stem": "04．（2025成都七中月考）我们定义：一个整数能表示成a²+b²（a，b是整数）的形式，则称这个数",
 "img": "imgs/qbank/qb_p139_04.jpg",
 "stemImg": null
@@ -5593,7 +5593,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一分式的基本性质",
 "section": "核心考点一分式的基本性质",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026江汉期末）如果把分式-中的x和y都扩大3倍，那么分式的值（C",
 "img": "imgs/qbank/qb_p142_01.jpg",
 "stemImg": null
@@ -5623,7 +5623,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "核心考点一分式的基本性质",
 "section": "核心考点一分式的基本性质",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "04．（2025武汉二中月考）不改变分式的值，将分式",
 "img": "imgs/qbank/qb_p142_04.jpg",
 "stemImg": null
@@ -5633,7 +5633,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "核心考点一分式的基本性质",
 "section": "核心考点一分式的基本性质",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "05．（2026江岸期末）下列分式中是最简分式的是（C",
 "img": "imgs/qbank/qb_p142_05.jpg",
 "stemImg": null
@@ -5663,7 +5663,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一先约分，再求值",
 "section": "核心考点一先约分，再求值",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "03．（2026东湖期末）先化简，再求值：（",
 "img": "imgs/qbank/qb_p144_03.jpg",
 "stemImg": null
@@ -5673,7 +5673,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_prose",
+"status": "ok",
 "stem": "01．（2026硚口期末）问题探究：求代数式x²",
 "img": "imgs/qbank/qb_p146_01.jpg",
 "stemImg": null
@@ -5683,7 +5683,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "其他",
 "section": "",
-"status": "warn_prose",
+"status": "ok",
 "stem": "02.（____）求y=-3x²+6x+5的最大值；",
 "img": "imgs/qbank/qb_p146_02.jpg",
 "stemImg": null
@@ -5713,7 +5713,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一逐步通分，裂项相消",
 "section": "核心考点一逐步通分，裂项相消",
-"status": "warn_prose",
+"status": "ok",
 "stem": "02．取倒法：遇到单项式结构的分式时，整体取倒.",
 "img": "imgs/qbank/qb_p149_02.jpg",
 "stemImg": null
@@ -5723,7 +5723,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一逐步通分，裂项相消",
 "section": "核心考点一逐步通分，裂项相消",
-"status": "warn_prose",
+"status": "ok",
 "stem": "03．连等设参法：若干个式子相等时，可以引入参数k，将问题转化为简单问题，",
 "img": "imgs/qbank/qb_p149_03.jpg",
 "stemImg": null
@@ -5743,7 +5743,7 @@ window.QBANK = {
 "qid": "05",
 "chapter": "核心考点四配凑法：根据条件和结论合理配凑",
 "section": "核心考点四配凑法：根据条件和结论合理配凑变形",
-"status": "warn_prose",
+"status": "ok",
 "stem": "05．先阅读解题过程，然后仿照例子解不等式：",
 "img": "imgs/qbank/qb_p150_05.jpg",
 "stemImg": null
@@ -5753,7 +5753,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一解分式方程",
 "section": "核心考点一解分式方程",
-"status": "warn_edge+prose",
+"status": "warn_partial",
 "stem": "01．解关于x的分式方程，注意解出方程的解后要代入最简公分母检验：",
 "img": "imgs/qbank/qb_p151_01.jpg",
 "stemImg": null
@@ -5763,7 +5763,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．一辆汽车开往距离出发地180km的目的地．出发后第一小时内按原计划的速度匀速行驶，一小",
 "img": "imgs/qbank/qb_p153_01.jpg",
 "stemImg": null
@@ -5773,7 +5773,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge+prose",
+"status": "ok",
 "stem": "02．（2026青山期末）甲、乙两辆汽车从A地出发沿同一公路开往距离A地420km的B地，甲车的",
 "img": "imgs/qbank/qb_p153_02.jpg",
 "stemImg": null
@@ -5783,7 +5783,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2025七一中学月考）元旦期间，甲、乙两人当天共同销售一批氢气球，已知甲每小时售卖的数",
 "img": "imgs/qbank/qb_p154_01.jpg",
 "stemImg": null
@@ -5793,7 +5793,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge+prose",
+"status": "warn_partial",
 "stem": "02．（2025江岸期末）某商店用6000元购进A商品若干件，用8000元购进B商品若干件，已知A",
 "img": "imgs/qbank/qb_p154_02.jpg",
 "stemImg": null
@@ -5873,7 +5873,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一单价的大小比较",
 "section": "核心考点一单价的大小比较",
-"status": "warn_prose",
+"status": "ok",
 "stem": "02．（2026东湖期末）某物业公司预购进A、B两种型号的清洁机器人，每台A型机比每台B型机平",
 "img": "imgs/qbank/qb_p158_02.jpg",
 "stemImg": null
@@ -5883,7 +5883,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026江岸期末）随着新能源汽车的日益增多，某公司计划购置如图所示的单枪、双枪两款新能",
 "img": "imgs/qbank/qb_p159_01.jpg",
 "stemImg": null
@@ -5893,7 +5893,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．在分式中，当分子的次数大于或等于分母的次数时，我们称之为“假分式”，例如：",
 "img": "imgs/qbank/qb_p160_01.jpg",
 "stemImg": null
@@ -5903,7 +5903,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "专题一规律探究（1）",
 "section": "专题一规律探究（1）",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "02.（2025七一中学月考）观察规律：（",
 "img": "imgs/qbank/qb_p161_02.jpg",
 "stemImg": null
@@ -5913,7 +5913,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "专题一规律探究（1）",
 "section": "专题一规律探究（1）",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "03．（2025洪山期末）杨辉三角形又称贾宪三角形，它的排列规律如图所示：在第一行中间写下数字",
 "img": "imgs/qbank/qb_p161_03.jpg",
 "stemImg": null
@@ -6063,7 +6063,7 @@ window.QBANK = {
 "qid": "04",
 "chapter": "专题一最值问题（1）-",
 "section": "专题一最值问题（1）-",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "04.如图，在△ABC中，AB=BC，乙ABC=____°，点D为AC中点，连接BD，点E，点F分别为BD，AB",
 "img": "imgs/qbank/qb_p165_04.jpg",
 "stemImg": null
@@ -6083,7 +6083,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "核心考点一将军饮马与垂线段最短结合",
 "section": "核心考点一将军饮马与垂线段最短结合",
-"status": "warn_edge",
+"status": "ok",
 "stem": "02．如图，在△ABC中，AD⊥BC于点D，且AD=BC，BC上方有一动点P满足S△PBC=",
 "img": "imgs/qbank/qb_p166_02.jpg",
 "stemImg": null
@@ -6163,7 +6163,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一直接构造含系数的线段",
 "section": "核心考点一直接构造含系数的线段",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．如图，在△ABC中，ZCAB=____°，ACB=____°，AC=3，D为AB的中点，E为线段AC上任意一",
 "img": "imgs/qbank/qb_p168_01.jpg",
 "stemImg": null
@@ -6263,7 +6263,7 @@ window.QBANK = {
 "qid": "07",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "07．如图，在等腰△ABC中，AB=AC，<A=____°，D，E两点分别是边AC，AB上的动点，且BE=2AD，",
 "img": "imgs/qbank/qb_p170_07.jpg",
 "stemImg": null
@@ -6283,7 +6283,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．如图，四边形ABCD中，AB=2，BC=4，△ACD为等边三角形，则BD的最大值为____",
 "img": "imgs/qbank/qb_p171_01.jpg",
 "stemImg": null
@@ -6433,7 +6433,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "核心考点一遇等腰可构造手拉手",
 "section": "核心考点一遇等腰可构造手拉手",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．如图，四边形ABCD中，<BAD=ABD=BCD=____°，BC=√2，则△ABC的面积为____",
 "img": "imgs/qbank/qb_p175_01.jpg",
 "stemImg": null
@@ -6493,7 +6493,7 @@ window.QBANK = {
 "qid": "03",
 "chapter": "核心考点一截长补短构造对称型全等",
 "section": "核心考点一截长补短构造对称型全等",
-"status": "warn_edge",
+"status": "ok",
 "stem": "03．如图，△ABC是等边三角形．AE//BC，点D在AB边上，点F在射线AE上，且DC=DF，作",
 "img": "imgs/qbank/qb_p176_03.jpg",
 "stemImg": null
@@ -6593,7 +6593,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．关于x的二次三项式x²+mx+n（m，n是常实数），现有以下结论：①若m+n=-1，则二次三项式",
 "img": "imgs/qbank/qb_p179_01.jpg",
 "stemImg": null
@@ -6613,7 +6613,7 @@ window.QBANK = {
 "qid": "02",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "02.（2026武昌期中）如图，△DEF为等边三角形，分别延长FD，DE，EF到点A，B，C，使DA=EB=FC，",
 "img": "imgs/qbank/qb_p180_02.jpg",
 "stemImg": null
@@ -6633,7 +6633,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "专题二、全等的证明与构造（2）",
 "section": "专题二、全等的证明与构造（2）",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026东湖期中）已知在四边形ABCD中，ZBAD+ZBCD=____°，AB=BC.",
 "img": "imgs/qbank/qb_p182_01.jpg",
 "stemImg": null
@@ -6653,7 +6653,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026武珞路中学期中）如图，△ABC≤△BED（其中C和D是一组对应点）.",
 "img": "imgs/qbank/qb_p184_01.jpg",
 "stemImg": null
@@ -6663,7 +6663,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2025硚口期中）在等腰△ACD和等腰△BCE中，AD=CD，CE=BE，ADC=ZCEB=α.",
 "img": "imgs/qbank/qb_p185_01.jpg",
 "stemImg": null
@@ -6673,7 +6673,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01.（2026硚口期中）在等腰△ABC中，AB=AC，D在边AC上，连接BD.",
 "img": "imgs/qbank/qb_p186_01.jpg",
 "stemImg": null
@@ -6703,7 +6703,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026东湖期末）△ABC是等边三角形.",
 "img": "imgs/qbank/qb_p189_01.jpg",
 "stemImg": null
@@ -6713,7 +6713,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026硚口期末）问题提出：如图1，在△ABC中，AB=AC，<BAC=α，D在边BC上（不与点",
 "img": "imgs/qbank/qb_p190_01.jpg",
 "stemImg": null
@@ -6723,7 +6723,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026青山期末）已知△ABC是等腰直角三角形，AC=BC，<ACB=____°，点D为边BC上一点，",
 "img": "imgs/qbank/qb_p191_01.jpg",
 "stemImg": null
@@ -6733,7 +6733,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026硚口期中）如图1，在等边△ADE中，B，C分别在边AD，AE上，BC//DE.",
 "img": "imgs/qbank/qb_p192_01.jpg",
 "stemImg": null
@@ -6753,7 +6753,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026汉阳期末）已知△ABC为等边三角形，E为BC延长线上一点，D为AC边上一点，",
 "img": "imgs/qbank/qb_p194_01.jpg",
 "stemImg": null
@@ -6773,7 +6773,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "专题三等腰三角形（1）",
 "section": "专题三等腰三角形（1）",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026东湖期末）在平面直角坐标系中，点A在x轴正半轴上，点B与点A关于y轴对称，C为",
 "img": "imgs/qbank/qb_p197_01.jpg",
 "stemImg": null
@@ -6783,7 +6783,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01.（2026蔡甸期末）平面直角坐标系中，点A（a,____），点B(0,b），且a,b满足a²-8a+16+√b-4=0.",
 "img": "imgs/qbank/qb_p198_01.jpg",
 "stemImg": null
@@ -6803,7 +6803,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026江岸期末）已知A为x轴负半轴上一点，点C与点A关于y轴对称，B为y轴正半轴上一点.",
 "img": "imgs/qbank/qb_p200_01.jpg",
 "stemImg": null
@@ -6813,7 +6813,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "ok",
 "stem": "01．（2026江汉期末）如图，在平面直角坐标系中，A，B是y轴正半轴上的两点，其中A在B点上",
 "img": "imgs/qbank/qb_p201_01.jpg",
 "stemImg": null
@@ -6823,7 +6823,7 @@ window.QBANK = {
 "qid": "01",
 "chapter": "其他",
 "section": "",
-"status": "warn_edge",
+"status": "warn_partial",
 "stem": "01．（2026硚口期末）如图1，在平面直角坐标系中，过点B（m，n）作BA上x轴于点A，作BC⊥y",
 "img": "imgs/qbank/qb_p202_01.jpg",
 "stemImg": null
