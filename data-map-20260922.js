@@ -54,7 +54,7 @@ window.EX_LESSONS = [
     } },
   { id: "ex4", subject: "数学", from: "核心考点·八上 p95 例1 · 等边三角形/含30°角",
     stemText: "如图，在△ABC 中，∠BAC=90°，D 是 BC 边上一点，△ACD 是等边三角形。<br>求证：∠B=30°。 <span style=\"color:#999;font-size:12px;\">（题干按图中条件编写）</span>",
-    stemImg: "imgs/ex4_s3.png", fig: "imgs/ex4_f3.png",
+    stemImg: "imgs/ex4_s4.png", fig: "imgs/ex4_f3.png",
     steps: {
       trig: "题面里的“等边/60°”＋图中的直角结构",
       entry: "等边每角 60° → 与直角组合出 30° → 含30°的直角三角形中 30°对边 = 斜边一半",
@@ -86,7 +86,7 @@ window.EX_LESSONS = [
     } },
   { id: "ex6", subject: "物理", from: "物理大培优·八上 p23 例 · s-t 图像",
     stemText: "某物体做直线运动，其 s-t 图像如图所示。<br>根据图像回答：① 各段分别做什么运动？速度多大？② 全程平均速度是多少？ <span style=\"color:#999;font-size:12px;\">（数据以图中坐标为准）</span>",
-    stemImg: "imgs/ex6_s3.png", fig: "imgs/ex6_f3.png",
+    stemImg: "imgs/ex6_s4.png", fig: "imgs/ex6_f3.png",
     steps: {
       trig: "题面里的“s-t 图像”＋求速度/运动状态",
       entry: "图像三句话：越陡越快、水平静止、落回横轴=返回出发点；平均速度=总路程÷总时间",
