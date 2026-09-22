@@ -69,7 +69,7 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
   </header>
   <nav class="toc" id="toc"></nav>
   <div id="qview" onclick="if(event.target===this)this.classList.remove('show')"><div class="qv-inner"><span class="qv-close" onclick="document.getElementById('qview').classList.remove('show')">✕ 关闭</span><div id="qv-stem"></div><img id="qv-img" alt="题目大图"></div></div>
-  <div id="selfcheck" style="background:#dcfce7;border:1px solid #86efac;color:#166534;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:10px;">✓ 页面交互就绪 · 版本 q3b（2026-09-22）——点题下方蓝紫按钮看大图</div>
+  <div id="selfcheck" style="background:#dcfce7;border:1px solid #86efac;color:#166534;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:10px;">✓ 页面交互就绪 · 版本 q4s(q3)——点题下方蓝紫按钮看大图</div>
   <div class="filter">
     <input id="kw" type="search" placeholder="🔍 搜题干关键词，如：轴对称 / 分式 / 翻折 / 压轴…">
     <div class="fbtns">
@@ -89,16 +89,19 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
 </div>
 <script>
 function retryData(el){
+  var base = el.src.split('?')[0].split('/').pop();
+  var alts = {'dq-math.js': ['dq-math-b.js'], 'dq-phys.js': ['dq-phys-b.js'], 'ds-math.js': ['ds-math-b.js'], 'ds-phys.js': ['ds-phys-b.js']}[base] || [];
+  if (!alts.length) return;
   var s = document.createElement('script');
-  s.src = el.src.split('?')[0] + '?rv=' + Date.now();
+  s.src = alts[0];
   s.onload = function(){ if (window.__boot) window.__boot(); };
   document.head.appendChild(s);
 }
 </script>
-<script src="data-questions-math-v3.js?v=922h" onerror="retryData(this)"></script>
-<script src="data-steps-math.js?v=922h" onerror="retryData(this)"></script>
-<script src="data-steps-phys.js?v=922h" onerror="retryData(this)"></script>
-<script src="data-questions-phys-v3.js?v=922h" onerror="retryData(this)"></script>
+<script src="dq-math.js" onerror="retryData(this)"></script>
+<script src="ds-math.js" onerror="retryData(this)"></script>
+<script src="ds-phys.js" onerror="retryData(this)"></script>
+<script src="dq-phys.js" onerror="retryData(this)"></script>
 <script>
 window.qviewOpen2 = function(btn){ qviewOpen(btn.parentNode.querySelector('.stem')); };
 window.qviewOpen = function(stemEl){
