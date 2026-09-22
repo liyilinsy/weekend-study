@@ -36,7 +36,13 @@ section.chap h2 { font-size:16px; padding:8px 12px; background:var(--card); bord
 details.orig { margin-top:8px; }
 details.orig summary { font-size:12px; color:#999; cursor:pointer; }
 details.orig img { max-width:100%; }
-footer { text-align:center; color:#999; font-size:12px; padding:18px 0 30px; line-height:1.8; }
+#qview{display:none; position:fixed; inset:0; background:rgba(15,18,30,.82); z-index:99; overflow:auto; padding:20px 10px;}
+  #qview.show{display:block;}
+  .qv-inner{max-width:760px; margin:0 auto; background:#fff; border-radius:14px; padding:18px; position:relative;}
+  .qv-close{position:sticky; float:right; top:0; background:#ef4444; color:#fff; border-radius:8px; padding:6px 14px; font-size:13px; cursor:pointer; z-index:2;}
+  #qv-stem{font-size:16.5px; line-height:1.9; border:2px solid #2b2f3a22; border-radius:8px; padding:12px; background:#fffdf8; margin-bottom:12px;}
+  #qv-img{width:100%; border-radius:8px; border:1px solid #e5e8f0; cursor:zoom-in;}
+  footer { text-align:center; color:#999; font-size:12px; padding:18px 0 30px; line-height:1.8; }
 @media(min-width:1440px){ .wrap{max-width:1150px} .qgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px} }
 .filter { background:var(--card); border:1px solid #e5e8f0; border-radius:10px; padding:10px 12px; margin-bottom:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
 .filter input { flex:1; min-width:200px; border:1px solid #d7dbe7; border-radius:8px; padding:8px 12px; font-size:14px; }
@@ -192,6 +198,18 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
     return true;
   }
   document.getElementById('kw').addEventListener('input', function(e){ kw = e.target.value.trim(); render(); });
+  // 点题目卡→大图做题模式
+  document.getElementById('content').addEventListener('click', function(e){
+    var card = e.target.closest('.q');
+    if (!card || e.target.closest('a, details, button')) return;
+    var stem = card.querySelector('.stem');
+    var img = card.querySelector('.q > img');
+    document.getElementById('qv-stem').innerHTML = stem ? stem.innerHTML : '';
+    var qvimg = document.getElementById('qv-img');
+    if (img){ qvimg.src = img.src; qvimg.style.display = 'block'; } else { qvimg.style.display = 'none'; }
+    document.getElementById('qview').classList.add('show');
+  });
+  document.getElementById('qv-img').addEventListener('click', function(){ this.style.transform = this.style.transform && this.style.transform !== 'none' ? 'none' : 'scale(1.6)'; this.style.transition = 'transform .25s'; this.style.transformOrigin = 'center'; });
   document.querySelectorAll('.fbtns button').forEach(function(b){
     b.addEventListener('click', function(){
       document.querySelectorAll('.fbtns button').forEach(function(x){ x.classList.remove('on'); });
@@ -222,5 +240,6 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
   }
 })();
 </script>
+<div id="qview" onclick="if(event.target===this)this.classList.remove('show')"><div class="qv-inner"><span class="qv-close" onclick="document.getElementById('qview').classList.remove('show')">✕ 关闭</span><div id="qv-stem"></div><img id="qv-img" alt="题目大图"></div></div>
 </body>
 </html>
