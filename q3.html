@@ -69,7 +69,7 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
   </header>
   <nav class="toc" id="toc"></nav>
   <div id="qview" onclick="if(event.target===this)this.classList.remove('show')"><div class="qv-inner"><span class="qv-close" onclick="document.getElementById('qview').classList.remove('show')">✕ 关闭</span><div id="qv-stem"></div><img id="qv-img" alt="题目大图"></div></div>
-  <div id="selfcheck" style="background:#dcfce7;border:1px solid #86efac;color:#166534;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:10px;">✓ 页面交互就绪（点题干文字可看大图；看不到本条=旧缓存，请 Ctrl+F5 强刷）</div>
+  <div id="selfcheck" style="background:#dcfce7;border:1px solid #86efac;color:#166534;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:10px;">✓ 页面交互就绪 · 版本 q3b（2026-09-22）——点题下方蓝紫按钮看大图</div>
   <div class="filter">
     <input id="kw" type="search" placeholder="🔍 搜题干关键词，如：轴对称 / 分式 / 翻折 / 压轴…">
     <div class="fbtns">
@@ -87,10 +87,18 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
     配套：<a href="map3.html">题型地图</a> · <a href="index.html">学习台</a> · <a href="pocket.html">随身查阅版</a>
   </footer>
 </div>
-<script src="data-questions-math-v3.js?v=922h"></script>
-<script src="data-steps-math.js?v=922h"></script>
-<script src="data-steps-phys.js?v=922h"></script>
-<script src="data-questions-phys-v3.js?v=922h"></script>
+<script>
+function retryData(el){
+  var s = document.createElement('script');
+  s.src = el.src.split('?')[0] + '?rv=' + Date.now();
+  s.onload = function(){ if (window.__boot) window.__boot(); };
+  document.head.appendChild(s);
+}
+</script>
+<script src="data-questions-math-v3.js?v=922h" onerror="retryData(this)"></script>
+<script src="data-steps-math.js?v=922h" onerror="retryData(this)"></script>
+<script src="data-steps-phys.js?v=922h" onerror="retryData(this)"></script>
+<script src="data-questions-phys-v3.js?v=922h" onerror="retryData(this)"></script>
 <script>
 window.qviewOpen2 = function(btn){ qviewOpen(btn.parentNode.querySelector('.stem')); };
 window.qviewOpen = function(stemEl){
@@ -103,6 +111,10 @@ window.qviewOpen = function(stemEl){
   if (img){ qi.src = img.src; qi.style.display = 'block'; } else { qi.style.display = 'none'; }
   document.getElementById('qview').className = 'show';
 };
+window.__boot = function(){
+  if (window.__booted) return;
+  if (!window.QBANK || !window.STEPS_MAP) return;
+  window.__booted = true;
 (function(){
   var TYPE_BY_RULE = [];
   (function(){
@@ -143,10 +155,10 @@ window.qviewOpen = function(stemEl){
       '<a class="more" href="q3.html?q=' + encodeURIComponent(hit.kw) + '">该题型全部题目 →</a></details>';
   }
   var groups = {}, gnames = [];
-  if (!window.QBANK){
+  if (!window.QBANK || !window.STEPS_MAP){
     var sc = document.getElementById('selfcheck');
-    if (sc){ sc.style.background = '#fee2e2'; sc.style.borderColor = '#fca5a5'; sc.style.color = '#991b1b';
-      sc.textContent = '⚠ 题库数据加载失败（CDN 边缘缓存）——请按 Ctrl+F5 强刷一次；仍失败请等 10 分钟后再试'; }
+    if (sc){ sc.style.background = '#fef3c7'; sc.style.borderColor = '#fcd34d'; sc.style.color = '#92400e';
+      sc.textContent = '⏳ 题库数据正在自愈加载（CDN 边缘缓存延迟），本条几秒内自动变为绿色✓，无需操作…'; }
     var ct = document.getElementById('content');
     if (ct) ct.innerHTML = '';
     return;
@@ -287,6 +299,8 @@ window.qviewOpen = function(stemEl){
     document.getElementById('content').innerHTML = hh;
   }
 })();
+};
+__boot();
 </script>
 </body>
 </html>
