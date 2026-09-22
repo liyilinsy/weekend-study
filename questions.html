@@ -160,9 +160,26 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
     document.getElementById('toc').innerHTML = toc;
   }
   renderHeader();
+  var URLQ = {};
   (function(){
-    var mq = new URLSearchParams(location.search).get('q');
-    if (mq){ kw = mq; document.getElementById('kw').value = mq; render(); }
+    var s = location.search.replace(/^\?/, '').split('&');
+    s.forEach(function(kv){ if (!kv) return; var p = kv.split('='); URLQ[decodeURIComponent(p[0]||'')] = decodeURIComponent((p[1]||'').replace(/\+/g, ' ')); });
+    if (URLQ.q){ kw = URLQ.q; var kwe = document.getElementById('kw'); if (kwe) kwe.value = URLQ.q; render(); }
+    if (URLQ.p){
+      setTimeout(function(){
+        var target = null;
+        var cards = document.querySelectorAll('.q');
+        for (var i = 0; i < cards.length; i++){
+          var pg = cards[i].querySelector('.pg');
+          if (pg && pg.textContent.replace(/\s/g, '').indexOf(URLQ.p.replace('_', '·')) >= 0){ target = cards[i]; break; }
+        }
+        if (target){
+          target.scrollIntoView({ block: 'center' });
+          target.style.outline = '3px solid #2563eb';
+          setTimeout(function(){ target.querySelector('.stem').click(); }, 400);
+        }
+      }, 600);
+    }
   })();
 
   var h = '';
@@ -178,9 +195,9 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
         '<span class="sec">' + (q.section || '') + '</span>' +
         '<span class="st ' + stc + '">' + stt + '</span></div>' +
         '<div class="stem">' + q.stem + '</div>' +
-        (q.img ? '<img loading="lazy" src="' + q.img + '?v=20260922a" alt="几何图">' :
+        (q.img ? '<img src="' + q.img + '?v=20260922a" alt="几何图">' :
                  '<div class="nofig">📎 本题为格点作图（灰色网格），图待人工补录</div>') +
-        (q.stemImg ? '<details class="orig"><summary>📜 书页题干原样（点开核对）</summary><img loading="lazy" src="' + q.stemImg + '" alt="题干原样"></details>' : '') +
+        (q.stemImg ? '<details class="orig"><summary>📜 书页题干原样（点开核对）</summary><img src="' + q.stemImg + '" alt="题干原样"></details>' : '') +
         taoluHTML(q) +
         '</div>';
     });
@@ -199,9 +216,13 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
   }
   document.getElementById('kw').addEventListener('input', function(e){ kw = e.target.value.trim(); render(); });
   // 点题目卡→大图做题模式
+  function closestEl(el, cls){
+    while (el && el !== document){ if (el.classList && el.classList.contains(cls)) return el; el = el.parentNode; }
+    return null;
+  }
   document.getElementById('content').addEventListener('click', function(e){
-    var card = e.target.closest('.q');
-    if (!card || e.target.closest('a, details, button')) return;
+    var card = closestEl(e.target, 'q');
+    if (!card || closestEl(e.target, 'taolu') || closestEl(e.target, 'orig') || (e.target.tagName === 'A')) return;
     var stem = card.querySelector('.stem');
     var img = card.querySelector('.q > img');
     document.getElementById('qv-stem').innerHTML = stem ? stem.innerHTML : '';
@@ -231,7 +252,7 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
           '<span class="sec">' + (q.section || '') + '</span>' +
           '<span class="st ' + stc + '">' + stt + '</span></div>' +
           '<div class="stem">' + q.stem + '</div>' +
-          (q.img ? '<img loading="lazy" src="' + q.img + '?v=20260922a" alt="几何图">' :
+          (q.img ? '<img src="' + q.img + '?v=20260922a" alt="几何图">' :
                    '<div class="nofig">📎 格点作图题，图待人工补录</div>') + taoluHTML(q) + '</div>';
       });
       hh += '</div></section>';
