@@ -192,8 +192,8 @@
           if (rel.count > 0){
             relHTML = '<details class="relq"><summary>📝 相关真题 ' + rel.count + ' 道（点开直接做题）</summary>' +
               rel.items.map(function(rq){
-                return '<a class="rq" href="questions.html?q=' + encodeURIComponent(rq.kw) + '" target="_blank">' +
-                  '<span class="rqpg">书p' + rq.page + '·' + rq.qid + '</span>' + rq.stem + '</a>';
+                return '<a class="rq" href="questions.html?q=' + encodeURIComponent(rq.kw) + '&p=' + rq.page + '_' + rq.qid + '" target="_blank">' +
+                  '<span class="rqpg">书p' + rq.page + '·' + rq.qid + '</span>' + rq.stem + ' <b style="color:#2563eb">点开本题 →</b></a>';
               }).join('') +
               (rel.count > rel.items.length ? '<div class="rqmore">…还有 ' + (rel.count - rel.items.length) + ' 道，点任意题目进题库看全部</div>' : '') +
               '</details>';
