@@ -200,6 +200,16 @@ window.__boot = function(){
     document.getElementById('toc').innerHTML = toc;
   }
   renderHeader();
+  setTimeout(function(){
+    var sc = document.getElementById('selfcheck');
+    if (!sc) return;
+    var d = document.createElement('span');
+    d.className = 'diag';
+    d.textContent = '诊断: 卡片' + document.querySelectorAll('.q').length + ' 按钮' + document.querySelectorAll('.openbtn').length +
+      ' 数据' + (window.QBANK ? 'OK' : 'FAIL') + (window.QBANK_PHYS ? '+物理OK' : '') + ' JS错误' + (window.__errs.length || 0) +
+      (window.__errs.length ? ': ' + window.__errs[0] : '');
+    sc.appendChild(d);
+  }, 3000);
   var URLQ = {};
   (function(){
     var s = location.search.replace(/^\?/, '').split('&');
