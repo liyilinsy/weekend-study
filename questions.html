@@ -66,6 +66,7 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
     <div class="stats" id="stats"></div>
   </header>
   <nav class="toc" id="toc"></nav>
+  <div id="selfcheck" style="background:#dcfce7;border:1px solid #86efac;color:#166534;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:10px;">✓ 页面交互就绪（点题干文字可看大图；看不到本条=旧缓存，请 Ctrl+F5 强刷）</div>
   <div class="filter">
     <input id="kw" type="search" placeholder="🔍 搜题干关键词，如：轴对称 / 分式 / 翻折 / 压轴…">
     <div class="fbtns">
@@ -88,6 +89,16 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
 <script src="data-steps-phys.js?v=20260921a"></script>
 <script src="data-questions-phys-v3.js?v=20260922b"></script>
 <script>
+window.qviewOpen = function(stemEl){
+  var card = stemEl;
+  while (card && card !== document.body){ if (card.className && (' ' + card.className + ' ').indexOf(' q ') >= 0) break; card = card.parentNode; }
+  var img = card ? (card.getElementsByTagName('img')[0] || null) : null;
+  var qs = document.getElementById('qv-stem');
+  var qi = document.getElementById('qv-img');
+  qs.innerHTML = stemEl.innerHTML;
+  if (img){ qi.src = img.src; qi.style.display = 'block'; } else { qi.style.display = 'none'; }
+  document.getElementById('qview').className = 'show';
+};
 (function(){
   var TYPE_BY_RULE = [];
   (function(){
@@ -194,7 +205,7 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
         '<span class="pg">书p' + q.page + ' · ' + q.qid + '</span>' +
         '<span class="sec">' + (q.section || '') + '</span>' +
         '<span class="st ' + stc + '">' + stt + '</span></div>' +
-        '<div class="stem">' + q.stem + '</div>' +
+        '<div class="stem" onclick="qviewOpen(this)" style="cursor:pointer" title="点击查看大图">' + q.stem + '</div>' +
         (q.img ? '<img src="' + q.img + '?v=20260922a" alt="几何图">' :
                  '<div class="nofig">📎 本题为格点作图（灰色网格），图待人工补录</div>') +
         (q.stemImg ? '<details class="orig"><summary>📜 书页题干原样（点开核对）</summary><img src="' + q.stemImg + '" alt="题干原样"></details>' : '') +
@@ -251,7 +262,7 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
           '<span class="pg">书p' + q.page + ' · ' + q.qid + '</span>' +
           '<span class="sec">' + (q.section || '') + '</span>' +
           '<span class="st ' + stc + '">' + stt + '</span></div>' +
-          '<div class="stem">' + q.stem + '</div>' +
+          '<div class="stem" onclick="qviewOpen(this)" style="cursor:pointer" title="点击查看大图">' + q.stem + '</div>' +
           (q.img ? '<img src="' + q.img + '?v=20260922a" alt="几何图">' :
                    '<div class="nofig">📎 格点作图题，图待人工补录</div>') + taoluHTML(q) + '</div>';
       });
