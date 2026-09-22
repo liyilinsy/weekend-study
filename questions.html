@@ -86,10 +86,10 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
     配套：<a href="map3.html">题型地图</a> · <a href="index.html">学习台</a> · <a href="pocket.html">随身查阅版</a>
   </footer>
 </div>
-<script src="data-questions-math-v3.js?v=20260922a"></script>
-<script src="data-steps-math.js?v=20260921a"></script>
-<script src="data-steps-phys.js?v=20260921a"></script>
-<script src="data-questions-phys-v3.js?v=20260922b"></script>
+<script src="data-questions-math-v3.js?v=922g"></script>
+<script src="data-steps-math.js?v=922g"></script>
+<script src="data-steps-phys.js?v=922g"></script>
+<script src="data-questions-phys-v3.js?v=922g"></script>
 <script>
 window.qviewOpen2 = function(btn){ qviewOpen(btn.parentNode.querySelector('.stem')); };
 window.qviewOpen = function(stemEl){
@@ -156,8 +156,9 @@ window.qviewOpen = function(stemEl){
     document.querySelectorAll('.fbtns button').forEach(function(x){ x.classList.toggle('on', x.dataset.f === 'all'); });
     renderHeader(); render();
   }
-  document.getElementById('sj-math').addEventListener('click', function(){ switchSubject('数学'); });
-  document.getElementById('sj-phys').addEventListener('click', function(){ switchSubject('物理'); });
+  var _sm = document.getElementById('sj-math'), _sp = document.getElementById('sj-phys');
+  if (_sm) _sm.addEventListener('click', function(){ switchSubject('数学'); });
+  if (_sp) _sp.addEventListener('click', function(){ switchSubject('物理'); });
   function renderHeader(){
     document.getElementById('hero-sub').textContent = Q.meta.desc;
     var s = document.getElementById('stats');
@@ -229,14 +230,15 @@ window.qviewOpen = function(stemEl){
     if (kw && q.stem.indexOf(kw) === -1 && (q.section || '').indexOf(kw) === -1) return false;
     return true;
   }
-  document.getElementById('kw').addEventListener('input', function(e){ kw = e.target.value.trim(); render(); });
+  var _kw = document.getElementById('kw'); if (_kw) _kw.addEventListener('input', function(e){ kw = e.target.value.trim(); render(); });
   // 点题目卡→大图做题模式
   function closestEl(el, cls){
     while (el && el !== document){ if (el.classList && el.classList.contains(cls)) return el; el = el.parentNode; }
     return null;
   }
-  document.getElementById('content').addEventListener('click', function(e){
+  var _content = document.getElementById('content'); if (_content) _content.addEventListener('click', function(e){
     var card = closestEl(e.target, 'q');
+
     if (!card || closestEl(e.target, 'taolu') || closestEl(e.target, 'orig') || (e.target.tagName === 'A')) return;
     var stem = card.querySelector('.stem');
     var img = card.querySelector('.q > img');
@@ -246,7 +248,7 @@ window.qviewOpen = function(stemEl){
     document.getElementById('qview').classList.add('show');
   });
   document.getElementById('qv-img').addEventListener('click', function(){ this.style.transform = this.style.transform && this.style.transform !== 'none' ? 'none' : 'scale(1.6)'; this.style.transition = 'transform .25s'; this.style.transformOrigin = 'center'; });
-  document.querySelectorAll('.fbtns button').forEach(function(b){
+  (document.querySelectorAll('.fbtns button') || []).forEach(function(b){
     b.addEventListener('click', function(){
       document.querySelectorAll('.fbtns button').forEach(function(x){ x.classList.remove('on'); });
       b.classList.add('on'); fmode = b.dataset.f; render();
