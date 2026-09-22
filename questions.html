@@ -36,7 +36,8 @@ section.chap h2 { font-size:16px; padding:8px 12px; background:var(--card); bord
 details.orig { margin-top:8px; }
 details.orig summary { font-size:12px; color:#999; cursor:pointer; }
 details.orig img { max-width:100%; }
-.openbtn{display:block; width:100%; margin-top:8px; background:linear-gradient(135deg,#2563eb,#7c3aed); color:#fff; border:none; border-radius:8px; padding:9px 0; font-size:14px; font-weight:bold; cursor:pointer;}
+.openrow{margin-bottom:8px;}
+  .openbtn{display:block; width:100%; margin-top:2px; background:linear-gradient(135deg,#2563eb,#7c3aed); color:#fff; border:none; border-radius:10px; padding:12px 0; font-size:15.5px; font-weight:bold; cursor:pointer; box-shadow:0 2px 8px rgba(37,99,235,.35); letter-spacing:1px;}
   .openbtn:hover{opacity:.9;}
   #qview{display:none; position:fixed; inset:0; background:rgba(15,18,30,.82); z-index:99; overflow:auto; padding:20px 10px;}
   #qview.show{display:block;}
@@ -233,8 +234,8 @@ window.__boot = function(){
         '<span class="pg">书p' + q.page + ' · ' + q.qid + '</span>' +
         '<span class="sec">' + (q.section || '') + '</span>' +
         '<span class="st ' + stc + '">' + stt + '</span></div>' +
+        '<div class="openrow"><button class="openbtn" onclick="qviewOpen2(this)">🔍 点开本题 · 大图做题</button></div>' +
         '<div class="stem">' + q.stem + '</div>' +
-       '<button class="openbtn" onclick="qviewOpen2(this)">🔍 点开本题（大图做题）</button>' +
         (q.img ? '<img src="' + q.img + '?v=20260922a" alt="几何图">' :
                  '<div class="nofig">📎 本题为格点作图（灰色网格），图待人工补录</div>') +
         (q.stemImg ? '<details class="orig"><summary>📜 书页题干原样（点开核对）</summary><img src="' + q.stemImg + '" alt="题干原样"></details>' : '') +
@@ -292,8 +293,8 @@ window.__boot = function(){
           '<span class="pg">书p' + q.page + ' · ' + q.qid + '</span>' +
           '<span class="sec">' + (q.section || '') + '</span>' +
           '<span class="st ' + stc + '">' + stt + '</span></div>' +
+          '<div class="openrow"><button class="openbtn" onclick="qviewOpen2(this)">🔍 点开本题 · 大图做题</button></div>' +
           '<div class="stem">' + q.stem + '</div>' +
-          '<button class="openbtn" onclick="qviewOpen2(this)">🔍 点开本题（大图做题）</button>' +
           (q.img ? '<img src="' + q.img + '?v=20260922a" alt="几何图">' :
                    '<div class="nofig">📎 格点作图题，图待人工补录</div>') + taoluHTML(q) + '</div>';
       });
