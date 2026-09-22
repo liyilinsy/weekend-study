@@ -68,6 +68,7 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
     <div class="stats" id="stats"></div>
   </header>
   <nav class="toc" id="toc"></nav>
+  <div id="qview" onclick="if(event.target===this)this.classList.remove('show')"><div class="qv-inner"><span class="qv-close" onclick="document.getElementById('qview').classList.remove('show')">✕ 关闭</span><div id="qv-stem"></div><img id="qv-img" alt="题目大图"></div></div>
   <div id="selfcheck" style="background:#dcfce7;border:1px solid #86efac;color:#166534;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:10px;">✓ 页面交互就绪（点题干文字可看大图；看不到本条=旧缓存，请 Ctrl+F5 强刷）</div>
   <div class="filter">
     <input id="kw" type="search" placeholder="🔍 搜题干关键词，如：轴对称 / 分式 / 翻折 / 压轴…">
@@ -86,10 +87,10 @@ details.taolu .more{font-size:12px; color:#2563eb; text-decoration:none; display
     配套：<a href="map3.html">题型地图</a> · <a href="index.html">学习台</a> · <a href="pocket.html">随身查阅版</a>
   </footer>
 </div>
-<script src="data-questions-math-v3.js?v=922g"></script>
-<script src="data-steps-math.js?v=922g"></script>
-<script src="data-steps-phys.js?v=922g"></script>
-<script src="data-questions-phys-v3.js?v=922g"></script>
+<script src="data-questions-math-v3.js?v=922h"></script>
+<script src="data-steps-math.js?v=922h"></script>
+<script src="data-steps-phys.js?v=922h"></script>
+<script src="data-questions-phys-v3.js?v=922h"></script>
 <script>
 window.qviewOpen2 = function(btn){ qviewOpen(btn.parentNode.querySelector('.stem')); };
 window.qviewOpen = function(stemEl){
@@ -142,6 +143,14 @@ window.qviewOpen = function(stemEl){
       '<a class="more" href="questions.html?q=' + encodeURIComponent(hit.kw) + '">该题型全部题目 →</a></details>';
   }
   var groups = {}, gnames = [];
+  if (!window.QBANK){
+    var sc = document.getElementById('selfcheck');
+    if (sc){ sc.style.background = '#fee2e2'; sc.style.borderColor = '#fca5a5'; sc.style.color = '#991b1b';
+      sc.textContent = '⚠ 题库数据加载失败（CDN 边缘缓存）——请按 Ctrl+F5 强刷一次；仍失败请等 10 分钟后再试'; }
+    var ct = document.getElementById('content');
+    if (ct) ct.innerHTML = '';
+    return;
+  }
   var SUBJ = '数学';
   function getQ(){ return SUBJ === '数学' ? window.QBANK : window.QBANK_PHYS; }
   var Q = getQ();
@@ -247,8 +256,8 @@ window.qviewOpen = function(stemEl){
     if (img){ qvimg.src = img.src; qvimg.style.display = 'block'; } else { qvimg.style.display = 'none'; }
     document.getElementById('qview').classList.add('show');
   });
-  document.getElementById('qv-img').addEventListener('click', function(){ this.style.transform = this.style.transform && this.style.transform !== 'none' ? 'none' : 'scale(1.6)'; this.style.transition = 'transform .25s'; this.style.transformOrigin = 'center'; });
-  (document.querySelectorAll('.fbtns button') || []).forEach(function(b){
+  var _qvi = document.getElementById('qv-img'); if (_qvi) _qvi.addEventListener('click', function(){ this.style.transform = this.style.transform && this.style.transform !== 'none' ? 'none' : 'scale(1.6)'; this.style.transition = 'transform .25s'; this.style.transformOrigin = 'center'; });
+  var _fbs = document.querySelectorAll('.fbtns button'); (_fbs || []).forEach(function(b){
     b.addEventListener('click', function(){
       document.querySelectorAll('.fbtns button').forEach(function(x){ x.classList.remove('on'); });
       b.classList.add('on'); fmode = b.dataset.f; render();
@@ -279,6 +288,5 @@ window.qviewOpen = function(stemEl){
   }
 })();
 </script>
-<div id="qview" onclick="if(event.target===this)this.classList.remove('show')"><div class="qv-inner"><span class="qv-close" onclick="document.getElementById('qview').classList.remove('show')">✕ 关闭</span><div id="qv-stem"></div><img id="qv-img" alt="题目大图"></div></div>
 </body>
 </html>
