@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>📚 天然学习台 · 一站全览</title>
+
+<style>
+
+body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#eef1f7;}
+
+.tabs{position:sticky;top:0;z-index:99;display:flex;gap:0;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+
+.tabs a{flex:1;text-align:center;padding:13px 0;font-size:15px;font-weight:bold;text-decoration:none;color:#64748b;border-bottom:3px solid transparent;}
+
+.tabs a[href="#tab-week"]{color:#2563eb;}
+
+.tabs a[href="#tab-kp"]{color:#0d9488;}
+
+.tabs a[href="#tab-s3"]{color:#7c3aed;}
+
+#tab-week:target ~ .tabs a[href="#tab-week"],
+
+#tab-kp:target ~ .tabs a[href="#tab-kp"],
+
+#tab-s3:target ~ .tabs a[href="#tab-s3"]{border-bottom-color:currentColor;background:#f8fafc;}
+
+#tab-graph:target ~ .tabs a[href="#tab-graph"]{border-bottom-color:currentColor;background:#fffbeb;}
+
+#tab-graph:target ~ #f-graph{display:block;}
+
+#tab-graph:target ~ #f-week{display:none;}
+
+.frame{display:none;width:100%;min-height:calc(100vh - 48px);border:0;}
+
+/* 默认显示按周; :target 时切换 */
+
+#tab-week:target ~ #f-week, #f-week{display:block;}
+
+#tab-kp:target ~ #f-kp{display:block;}
+
+#tab-kp:target ~ #f-week{display:none;}
+
+#tab-s3:target ~ #f-s3{display:block;}
+
+#tab-s3:target ~ #f-week{display:none;}
+
+</style>
+
+</head>
+
+<body>
+
+<span id="tab-week"></span><span id="tab-kp"></span><span id="tab-s3"></span><span id="tab-graph"></span>
+
+<nav class="tabs">
+
+<a href="#tab-week">📅 按周做题</a>
+
+<a href="#tab-kp">🧭 知识点</a>
+
+<a href="#tab-s3">📚 全书题库</a>
+
+<a href="#tab-graph" style="color:#b45309;">🕸 图谱</a>
+
+</nav>
+
+<iframe id="f-week" class="frame" src="w3.html" title="按周"></iframe>
+
+<iframe id="f-kp" class="frame" loading="lazy" src="k3.html" title="知识点"></iframe>
+
+<iframe id="f-graph" class="frame" loading="lazy" src="g3.html" title="图谱"></iframe>
+
+<iframe id="f-s3" class="frame" loading="lazy" src="b3.html" title="全书"></iframe>
+
+</body>
+
+</html>
+
