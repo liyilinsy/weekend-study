@@ -24,6 +24,9 @@ body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#eef1f7;}
 
 .tabs a[href="#tab-s3"]{color:#7c3aed;}
 
+#tab-ess:target ~ .tabs a[href="#tab-ess"]{color:#ea580c;border-bottom-color:currentColor;background:#fff7ed;}
+#tab-ess:target ~ #f-ess{display:block;}
+#tab-ess:target ~ #f-week{display:none;}
 #tab-week:target ~ .tabs a[href="#tab-week"],
 
 #tab-kp:target ~ .tabs a[href="#tab-kp"],
@@ -56,11 +59,13 @@ body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#eef1f7;}
 
 <body>
 
-<span id="tab-week"></span><span id="tab-kp"></span><span id="tab-s3"></span><span id="tab-graph"></span>
+<span id="tab-week"></span><span id="tab-ess"></span><span id="tab-kp"></span><span id="tab-s3"></span><span id="tab-graph"></span>
 
 <nav class="tabs">
 
 <a href="#tab-week">📅 按周做题</a>
+
+<a href="#tab-ess" style="color:#ea580c;">⏱ 精华20分钟</a>
 
 <a href="#tab-kp">🧭 知识点</a>
 
@@ -72,6 +77,7 @@ body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#eef1f7;}
 
 <iframe id="f-week" class="frame" src="w7.html" title="按周"></iframe>
 
+<iframe id="f-ess" class="frame" loading="lazy" src="p7.html" title="精华"></iframe>
 <iframe id="f-kp" class="frame" loading="lazy" src="k6.html" title="知识点"></iframe>
 
 <iframe id="f-graph" class="frame" loading="lazy" src="g6.html" title="图谱"></iframe>
