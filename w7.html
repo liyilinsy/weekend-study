@@ -1732,4 +1732,62 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     b.addEventListener('click', function(ev){ ev.preventDefault(); ev.stopPropagation(); kick(box); });
     box.appendChild(b);
   });
-})();</script></body></html>
+})();</script>
+<!-- 专注模式: 深色一题流 -->
+<style>
+#focusBtn{position:fixed;right:14px;bottom:14px;z-index:999;background:#0f172a;color:#7dd3fc;border:1px solid #1e3a5f;border-radius:20px;padding:8px 16px;font-size:13px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+#focusOv{position:fixed;inset:0;z-index:998;background:#0b1220;display:flex;flex-direction:column}
+#fbar{flex:none;display:flex;gap:10px;align-items:center;justify-content:center;padding:10px;background:#0d1526;border-bottom:1px solid #1c2a44}
+#fbar button{background:#12203a;color:#93c5fd;border:1px solid #24406b;border-radius:14px;padding:6px 14px;font-size:13px;cursor:pointer}
+#fbar b{color:#e2e8f0;font-size:13px;min-width:90px;text-align:center}
+#fq{flex:1;overflow:auto;padding:18px 12px 90px}
+#fq .q{max-width:760px;margin:0 auto;background:#101a30;border:1px solid #1e2c4a;border-radius:14px;padding:14px 16px;color:#dbe4f5}
+#fq .q .brief,#fq .q .stem,#fq .q .tl,#fq .q div{color:#dbe4f5}
+#fq .q .cnt,#fq .q .pg{color:#94a3b8}
+#fq .q .st{color:#fbbf24}
+#fq .q details{background:#0d1730;border:1px solid #1e2c4a;border-radius:10px;margin:8px 0;padding:0 12px}
+#fq .q details summary{color:#7dd3fc;list-style:revert}
+#fq .q details.orig summary{color:#94a3b8}
+#fq .q details.anscard summary{color:#f87171}
+#fq .q details.animbox summary{color:#fbbf24}
+#fq .q details.bigq{background:transparent;border:0;padding:0}
+#fq .q details.bigq>summary{background:linear-gradient(135deg,#1d4ed8,#7c3aed);color:#fff;border-radius:10px;padding:10px 0;text-align:center;font-weight:bold}
+#fq .q img{max-width:100%;border-radius:10px;background:#fff;display:block;margin:8px auto}
+#fq .animcap{background:#0d1730;border-color:#1e2c4a;color:#9fb3d1}
+</style>
+<button type="button" id="focusBtn">🎯 专注模式</button>
+<script>
+(function(){
+  var qs=[].slice.call(document.querySelectorAll('.q'));
+  if(!qs.length) return;
+  var key='fi_'+location.pathname, ov=null,
+      cur=Math.min(+(sessionStorage.getItem(key)||0), qs.length-1);
+  function kick(c){[].forEach.call(c.querySelectorAll('animate,animateTransform'),function(a){try{a.beginElement()}catch(e){}})}
+  function close(){ov.remove();ov=null;document.onkeydown=null}
+  function show(i){
+    cur=(i+qs.length)%qs.length; sessionStorage.setItem(key,cur);
+    var c=qs[cur].cloneNode(true);
+    [].forEach.call(c.querySelectorAll('details.bigq'),function(d){d.open=true});
+    [].forEach.call(c.querySelectorAll('.animreplay'),function(x){x.onclick=function(ev){ev.preventDefault();ev.stopPropagation();kick(c)}});
+    var box=ov.querySelector('#fq');
+    box.innerHTML=''; box.appendChild(c); box.scrollTop=0; kick(c);
+    ov.querySelector('#fnum').textContent=(cur+1)+' / '+qs.length;
+  }
+  document.getElementById('focusBtn').onclick=function(){
+    ov=document.createElement('div'); ov.id='focusOv';
+    ov.innerHTML='<div id="fbar"><button data-a="p">← 上一题</button><b id="fnum"></b><button data-a="n">下一题 →</button><button data-a="x">✕ 退出</button></div><div id="fq"></div>';
+    document.body.appendChild(ov);
+    ov.querySelector('#fbar').addEventListener('click',function(e){
+      var a=e.target.getAttribute&&e.target.getAttribute('data-a');
+      if(a==='p')show(cur-1); else if(a==='n')show(cur+1); else if(a==='x')close();
+    });
+    document.onkeydown=function(e){
+      if(e.key==='ArrowLeft')show(cur-1);
+      else if(e.key==='ArrowRight')show(cur+1);
+      else if(e.key==='Escape')close();
+    };
+    show(cur);
+  };
+})();
+</script>
+</body></html>
