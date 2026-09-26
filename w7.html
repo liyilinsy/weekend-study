@@ -1734,14 +1734,17 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
   });
 })();</script>
 
-<!-- 专注模式v2: 深色一题流+搜索+AI详解 -->
+
+<!-- 专注模式v3: 深色一题流+搜索+AI详解+科目筛选+进度记忆 -->
 <style>
 #focusBtn{position:fixed;right:14px;bottom:14px;z-index:999;background:#0f172a;color:#7dd3fc;border:1px solid #1e3a5f;border-radius:20px;padding:8px 16px;font-size:13px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 #focusOv{position:fixed;inset:0;z-index:998;background:#0b1220;display:flex;flex-direction:column}
-#fbar{flex:none;display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;padding:8px 10px;background:#0d1526;border-bottom:1px solid #1c2a44}
+#fbar{flex:none;display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;padding:8px 10px;background:#0d1526;border-bottom:1px solid #1c2a44;position:relative}
 #fbar button{background:#12203a;color:#93c5fd;border:1px solid #24406b;border-radius:14px;padding:6px 14px;font-size:13px;cursor:pointer}
 #fbar b{color:#e2e8f0;font-size:13px;min-width:80px;text-align:center}
-#fsearch{width:230px;background:#12203a;color:#e2e8f0;border:1px solid #24406b;border-radius:14px;padding:6px 12px;font-size:13px;outline:none}
+.fsub{border-radius:16px!important}
+.fsub.on{background:#1d4ed8!important;color:#fff!important;border-color:#3b82f6!important}
+#fsearch{width:220px;background:#12203a;color:#e2e8f0;border:1px solid #24406b;border-radius:14px;padding:6px 12px;font-size:13px;outline:none}
 #fscount{color:#7dd3fc;font-size:12px;min-width:56px}
 #fdrop{position:absolute;top:44px;left:50%;transform:translateX(-50%);width:min(560px,92vw);max-height:300px;overflow:auto;background:#101a30;border:1px solid #24406b;border-radius:10px;display:none;z-index:5}
 #fdrop div{padding:7px 12px;color:#dbe4f5;font-size:13px;cursor:pointer;border-bottom:1px solid #1a2742}
@@ -1780,13 +1783,9 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
 <button type="button" id="focusBtn">🎯 专注模式</button>
 <script>
 (function(){
-  var qs=[].slice.call(document.querySelectorAll('.q'));
-  if(!qs.length) return;
-  var key='fi_'+location.pathname, ov=null,
-      cur=Math.min(+(sessionStorage.getItem(key)||0), qs.length-1);
+  var all=[].slice.call(document.querySelectorAll('.q'));
+  if(!all.length) return;
   var AI_BASE=localStorage.getItem('ai_base')||'http://127.0.0.1:3000';
-  function kick(c){[].forEach.call(c.querySelectorAll('animate,animateTransform'),function(a){try{a.beginElement()}catch(e){}})}
-  function close(){ov.remove();ov=null;document.onkeydown=null;var ai=document.getElementById('fai');if(ai)ai.remove()}
   function pgOf(card){var p=card.querySelector('.pg');return p?p.textContent.trim():''}
   function textOf(card,sel){var n=card.querySelector(sel);return n?n.textContent.trim():''}
   function subjectOf(card){
@@ -1794,27 +1793,51 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     while(n&&n!==document.body){ if(n.tagName==='DETAILS'){var s=n.querySelector('summary');var t=s?s.textContent:'';if(m=t.match(/数学|物理/))return m[0];} n=n.parentElement; }
     return '数学';
   }
+  var subs=all.map(subjectOf);
+  var hasMath=subs.indexOf('数学')>=0, hasPhys=subs.indexOf('物理')>=0;
+  // 当前筛选与列表
+  var curSubj=localStorage.getItem('fisub_'+location.pathname)||'';
+  if(curSubj==='数学'&&!hasMath)curSubj='';
+  if(curSubj==='物理'&&!hasPhys)curSubj='';
+  var list=[], cur=0, ov=null;
+  function pkey(){return 'fi_'+location.pathname+'_'+curSubj}
+  function rebuild(){
+    list=[]; all.forEach(function(el,i){ if(!curSubj||subs[i]===curSubj) list.push(i); });
+    cur=Math.min(+(localStorage.getItem(pkey())||0), list.length-1); if(cur<0)cur=0;
+  }
+  rebuild();
+  function kick(c){[].forEach.call(c.querySelectorAll('animate,animateTransform'),function(a){try{a.beginElement()}catch(e){}})}
+  function close(){ov.remove();ov=null;document.onkeydown=null;var ai=document.getElementById('fai');if(ai)ai.remove()}
   function show(i){
-    cur=(i+qs.length)%qs.length; sessionStorage.setItem(key,cur);
-    var c=qs[cur].cloneNode(true);
+    cur=(i+list.length)%list.length; localStorage.setItem(pkey(),cur);
+    var c=all[list[cur]].cloneNode(true);
     [].forEach.call(c.querySelectorAll('details.bigq'),function(d){d.open=true});
     [].forEach.call(c.querySelectorAll('.animreplay'),function(x){x.onclick=function(ev){ev.preventDefault();ev.stopPropagation();kick(c)}});
     var box=ov.querySelector('#fq');
     box.innerHTML=''; box.appendChild(c); box.scrollTop=0; kick(c);
-    ov.querySelector('#fnum').textContent=(cur+1)+' / '+qs.length;
+    ov.querySelector('#fnum').textContent=(cur+1)+' / '+list.length;
     var ai=document.getElementById('fai');
     if(ai) ai.querySelector('.curpg').textContent=pgOf(c);
   }
-  // ---------- 搜索 ----------
-  var index=qs.map(function(el,i){
-    return {i:i, pg:pgOf(el), t:(el.textContent||'').replace(/\s+/g,' ').slice(0,400)};
-  });
+  function setSubj(s){
+    curSubj=s; localStorage.setItem('fisub_'+location.pathname,s);
+    rebuild();
+    [].forEach.call(ov.querySelectorAll('.fsub'),function(b){b.classList.toggle('on',b.getAttribute('data-s')===s)});
+    show(0);
+  }
+  // ---------- 搜索(在当前筛选内) ----------
+  var index=null;
+  function ensureIndex(){
+    if(index)return index;
+    index=list.map(function(i){return {i:i,pg:pgOf(all[i]),t:(all[i].textContent||'').replace(/\s+/g,' ').slice(0,400)}});
+    return index;
+  }
   function normPg(s){return s.replace(/[·.()（）\s]/g,'')}
   function doSearch(q){
     q=q.trim(); if(!q) return [];
-    var nq=normPg(q), pgHit=[], txtHit=[];
+    var nq=normPg(q), pgHit=[], txtHit=[], idx=ensureIndex();
     var mq=q.match(/^(\d{1,3})[.·](\d{1,2})$/);
-    index.forEach(function(it){
+    idx.forEach(function(it){
       var npg=normPg(it.pg);
       var pgm=(npg.indexOf(nq)>=0)||(mq&&it.pg==='p'+mq[1]+'·'+mq[2].replace(/^0/,'').padStart(2,'0'));
       if(pgm) pgHit.push(it.i);
@@ -1829,13 +1852,14 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     ov.querySelector('#fscount').textContent=hits.length? hits.length+'题':'无';
     if(!hits.length){d.style.display='none';return}
     d.innerHTML='';
-    hits.slice(0,30).forEach(function(i){
+    hits.slice(0,30).forEach(function(qi){
       var r=document.createElement('div');
+      var it=ensureIndex().filter(function(x){return x.i===qi})[0];
       r.innerHTML='<span class="pg"></span><span></span>';
-      r.querySelector('.pg').textContent=index[i].pg;
-      var t=index[i].t, at=Math.max(0,t.indexOf(q));
+      r.querySelector('.pg').textContent=it.pg;
+      var t=it.t, at=Math.max(0,t.indexOf(q));
       r.children[1].textContent=(at>12?'…':'')+t.substr(Math.max(0,at-12),60);
-      r.onclick=function(){d.style.display='none';show(i)};
+      r.onclick=function(){d.style.display='none';show(list.indexOf(qi))};
       d.appendChild(r);
     });
     d.style.display='block';
@@ -1877,7 +1901,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     if(!q) return;
     inp.value='';
     bubble('u',q);
-    var c=qs[cur];
+    var c=all[list[cur]];
     var ctx='【题号】'+pgOf(c)+'\n【题目】'+(textOf(c,'.stem')||textOf(c,'.brief'))+'\n【官方答案】'+textOf(c,'.anstext');
     var btn=ai.querySelector('#fsend'); btn.disabled=true;
     var wait=bubble('a','AI 老师思考中…（最多约1分钟）');
@@ -1885,29 +1909,34 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
       body:JSON.stringify({subject:subjectOf(c),question:ctx+'\n【学生提问】'+q})})
       .then(function(r){return r.json().then(function(j){return r.ok?j:Promise.reject(j.error||('HTTP '+r.status))})})
       .then(function(j){wait.textContent=j.answer})
-      .catch(function(e){wait.className='fmsg err';wait.textContent='连不上 AI：'+e+'\n请确认学习工具已启动(start-study.bat)，或点⚙修改地址。'})
+      .catch(function(e){wait.className='fmsg err';wait.textContent='连不上 AI：'+e+'\n请确认学习工具已启动(桌面「学习工具启动」)，或点⚙修改地址。'})
       .finally(function(){btn.disabled=false});
   }
   // ---------- 入口 ----------
   document.getElementById('focusBtn').onclick=function(){
     ov=document.createElement('div'); ov.id='focusOv';
-    ov.innerHTML='<div id="fbar"><button data-a="p">← 上一题</button><b id="fnum"></b><button data-a="n">下一题 →</button>'+
-      '<input id="fsearch" placeholder="🔍 搜题号/关键词，如 26.4 或 折叠">'+
+    var chips='<button class="fsub on" data-s="">全部('+all.length+')</button>';
+    if(hasMath)chips+='<button class="fsub" data-s="数学">📐数学('+subs.filter(function(s){return s==='数学'}).length+')</button>';
+    if(hasPhys)chips+='<button class="fsub" data-s="物理">🔬物理('+subs.filter(function(s){return s==='物理'}).length+')</button>';
+    ov.innerHTML='<div id="fbar">'+chips+'<button data-a="p">←</button><b id="fnum"></b><button data-a="n">→</button>'+
+      '<input id="fsearch" placeholder="🔍 搜题号/关键词">'+
       '<span id="fscount"></span><button data-a="ai">🤖 AI详解</button><button data-a="x">✕ 退出</button>'+
       '<div id="fdrop"></div></div><div id="fq"></div>';
     document.body.appendChild(ov);
     var bar=ov.querySelector('#fbar');
     bar.addEventListener('click',function(e){
+      var s=e.target.getAttribute&&e.target.getAttribute('data-s');
+      if(s!==null&&s!==undefined&&e.target.classList.contains('fsub')){setSubj(s);return}
       var a=e.target.getAttribute&&e.target.getAttribute('data-a');
       if(a==='p')show(cur-1); else if(a==='n')show(cur+1);
       else if(a==='x')close();
-      else if(a==='ai'){var ai=ensureAI();ai.classList.add('on');ai.querySelector('.curpg').textContent=pgOf(qs[cur])}
+      else if(a==='ai'){var ai=ensureAI();ai.classList.add('on');ai.querySelector('.curpg').textContent=pgOf(all[list[cur]])}
     });
     var si=bar.querySelector('#fsearch');
-    si.addEventListener('input',function(){clearTimeout(dropTimer);var q=si.value;dropTimer=setTimeout(function(){renderDrop(doSearch(q),q)},180)});
+    si.addEventListener('input',function(){clearTimeout(dropTimer);index=null;var q=si.value;dropTimer=setTimeout(function(){renderDrop(doSearch(q),q)},180)});
     si.addEventListener('keydown',function(e){
       var hits=doSearch(si.value);
-      if(e.key==='Enter'&&hits.length){ov.querySelector('#fdrop').style.display='none';show(hits[0])}
+      if(e.key==='Enter'&&hits.length){ov.querySelector('#fdrop').style.display='none';show(list.indexOf(hits[0]))}
       if(e.key==='Escape')si.value='';
       e.stopPropagation();
     });
@@ -1917,6 +1946,8 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
       else if(e.key==='ArrowRight')show(cur+1);
       else if(e.key==='Escape')close();
     };
+    // 恢复筛选态
+    if(curSubj)[].forEach.call(ov.querySelectorAll('.fsub'),function(b){b.classList.toggle('on',b.getAttribute('data-s')===curSubj)});
     show(cur);
   };
 })();
