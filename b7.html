@@ -1343,7 +1343,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     var c=all[list[cur]];
     var ctx='【题号】'+pgOf(c)+'\n【题目】'+(textOf(c,'.stem')||textOf(c,'.brief'))+'\n【官方答案】'+textOf(c,'.anstext');
     var btn=ai.querySelector('#fsend'); btn.disabled=true;
-    var wait=bubble('a','AI 老师思考中…（最多约1分钟）');
+    var wait=bubble('a','AI 老师思考中…难题可能想2-3分钟，别关页面');
     fetch(AI_BASE+'/api/qa',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({subject:subjectOf(c),question:ctx+'\n【学生提问】'+q})})
       .then(function(r){return r.json().then(function(j){return r.ok?j:Promise.reject(j.error||('HTTP '+r.status))})})
