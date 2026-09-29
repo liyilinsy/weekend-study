@@ -1785,6 +1785,8 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
 #fq-input{flex:1;background:#12203a;color:#e2e8f0;border:1px solid #24406b;border-radius:12px;padding:8px 12px;font-size:13px;outline:none}
 #fsend{background:#1d4ed8;color:#fff;border:0;border-radius:12px;padding:8px 16px;font-size:13px;cursor:pointer}
 #fsend:disabled{opacity:.5}
+.fmode{margin-left:auto}
+
 </style>
 <button type="button" id="focusBtn">🎯 专注模式</button>
 <script>
@@ -1879,7 +1881,9 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
       '<button data-a="cfg" title="设置学习工具地址">⚙</button><button data-a="x">✕</button></div>'+
       '<div id="fmsgs"></div>'+
       '<div class="quick"><button data-q="请给我这题的详细解题思路，分步讲清楚每一步为什么">📖 详细思路</button>'+
-      '<button data-q="我做错了，请分析这道题常见的错误原因，再讲解正确思路（我的答案是：">⚠ 我为什么错</button></div>'+
+      '<button data-q="我做错了，请分析这道题常见的错误原因，再讲解正确思路（我的答案是：">⚠ 我为什么错</button>'+
+      '<button id="fvari">🔁 举一反三</button>'+
+      '<label class="fmode" style="font-size:12px;color:#94a3b8;display:flex;align-items:center;gap:4px"><input type="checkbox" id="fmodeT">🤔引导模式(不给答案只追问)</label></div>'+
       '<div class="ft"><input id="fq-input" placeholder="问这道题的任何问题…"><button id="fsend">发送</button></div>';
     document.body.appendChild(ai);
     ai.querySelector('.hd').addEventListener('click',function(e){
@@ -1888,7 +1892,20 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
       else if(a==='cfg'){var v=prompt('学习工具地址(手机可填 https://desktop-70le6fm.tail1c0a53.ts.net)：',AI_BASE);if(v){AI_BASE=v.replace(/\/+$/,'');localStorage.setItem('ai_base',AI_BASE)}}
     });
     ai.querySelector('.quick').addEventListener('click',function(e){
-      if(e.target.tagName==='BUTTON'){ai.querySelector('#fq-input').value=e.target.getAttribute('data-q');ai.querySelector('#fq-input').focus()}
+      if(e.target.id==='fvari'){
+        var c2=all[list[cur]];
+        var ctx2='【题号】'+pgOf(c2)+'\n【题目】'+(textOf(c2,'.stem')||textOf(c2,'.brief'))+'\n【官方答案】'+textOf(c2,'.anstext');
+        ai.querySelector('#fq-input').value='';
+        bubble('u','🔁 请出一道同类变式题');
+        var wait2=bubble('a','出题中…');
+        fetch(AI_BASE+'/api/qa',{method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({subject:subjectOf(c2),question:ctx2+'\n【要求】请基于本题考点编一道同类变式题（换数字或换情境），给出：变式题目、答案、三步简要解析。开头写【变式练习·AI生成，答案供参考】'})})
+          .then(function(r){return r.json().then(function(j){return r.ok?j:Promise.reject(j.error)})})
+          .then(function(j){wait2.textContent=j.answer})
+          .catch(function(e){wait2.className='fmsg err';wait2.textContent='失败：'+e});
+        return;
+      }
+      if(e.target.tagName==='BUTTON'&&e.target.getAttribute('data-q')){ai.querySelector('#fq-input').value=e.target.getAttribute('data-q');ai.querySelector('#fq-input').focus()}
     });
     ai.querySelector('#fsend').onclick=sendAI;
     ai.querySelector('#fq-input').addEventListener('keydown',function(e){if(e.key==='Enter')sendAI()});
@@ -1901,6 +1918,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     ai.querySelector('#fmsgs').scrollTop=1e9;
     return m;
   }
+  var fchat=[], fchatPq='';
   function sendAI(){
     var ai=document.getElementById('fai'); if(!ai) return;
     var inp=ai.querySelector('#fq-input'), q=inp.value.trim();
@@ -1908,13 +1926,17 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     inp.value='';
     bubble('u',q);
     var c=all[list[cur]];
-    var ctx='【题号】'+pgOf(c)+'\n【题目】'+(textOf(c,'.stem')||textOf(c,'.brief'))+'\n【官方答案】'+textOf(c,'.anstext');
+    var pg=pgOf(c);
+    if(pg!==fchatPq){fchat=[];fchatPq=pg}
+    var ctx='【题号】'+pg+'\n【题目】'+(textOf(c,'.stem')||textOf(c,'.brief'))+'\n【官方答案】'+textOf(c,'.anstext');
+    var socr=ai.querySelector('#fmodeT')&&ai.querySelector('#fmodeT').checked;
     var btn=ai.querySelector('#fsend'); btn.disabled=true;
-    var wait=bubble('a','AI 老师思考中…（最多约1分钟）');
+    var wait=bubble('a',socr?'AI 老师思考中…（引导模式：她会一步一步问你）':'AI 老师思考中…（最多约1分钟）');
     fetch(AI_BASE+'/api/qa',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({subject:subjectOf(c),question:ctx+'\n【学生提问】'+q})})
+      body:JSON.stringify({subject:subjectOf(c),question:(fchat.length? q : ctx+'\n【学生提问】'+q),
+        mode:socr?'socratic':'normal',history:fchat})})
       .then(function(r){return r.json().then(function(j){return r.ok?j:Promise.reject(j.error||('HTTP '+r.status))})})
-      .then(function(j){wait.textContent=j.answer})
+      .then(function(j){wait.textContent=j.answer;fchat.push({role:'user',content:q},{role:'assistant',content:j.answer});if(fchat.length>16)fchat=fchat.slice(-16)})
       .catch(function(e){wait.className='fmsg err';wait.textContent='连不上 AI：'+e+'\n请确认学习工具已启动(桌面「学习工具启动」)，或点⚙修改地址。'})
       .finally(function(){btn.disabled=false});
   }
