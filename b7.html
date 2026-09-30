@@ -1257,11 +1257,45 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
   function close(){ov.remove();ov=null;document.onkeydown=null;var ai=document.getElementById('fai');if(ai)ai.remove()}
   function show(i){
     cur=(i+list.length)%list.length; localStorage.setItem(pkey(),cur);
+    try{
+      var today=new Date().toISOString().slice(0,10);
+      var d=JSON.parse(localStorage.getItem('fx_day')||'{}');
+      if(d.date!==today){d.date=today;d.n=0}
+      d.n++;
+      localStorage.setItem('fx_day',JSON.stringify(d));
+      var st=JSON.parse(localStorage.getItem('fx_streak')||'{}');
+      if(st.last!==today){
+        var yest=new Date(Date.now()-86400000).toISOString().slice(0,10);
+        st.days=(st.last===yest)?(st.days||0)+1:1;
+        st.last=today;
+        localStorage.setItem('fx_streak',JSON.stringify(st));
+      }
+      var dv=document.querySelector('#fnum');
+      if(dv) dv.title='今日'+d.n+'题·连续'+st.days+'天';
+      var fb=document.querySelector('#fstreak');
+      if(fb) fb.textContent='🔥今日'+d.n+' · 连续'+st.days+'天';
+    }catch(e){}
     var c=all[list[cur]].cloneNode(true);
     [].forEach.call(c.querySelectorAll('details.bigq'),function(d){d.open=true});
     [].forEach.call(c.querySelectorAll('.animreplay'),function(x){x.onclick=function(ev){ev.preventDefault();ev.stopPropagation();kick(c)}});
     var box=ov.querySelector('#fq');
     box.innerHTML=''; box.appendChild(c); box.scrollTop=0; kick(c);
+    try{
+      var vk='fxv_'+pgOf(all[list[cur]]);
+      var va=JSON.parse(localStorage.getItem(vk)||'[]');
+      if(va.length){
+        var vd=document.createElement('details');
+        vd.style.cssText='max-width:760px;margin:8px auto;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:10px';
+        vd.innerHTML='<summary style="padding:8px 12px;cursor:pointer;color:#059669;font-size:13px;font-weight:bold">📝 对症练×'+va.length+'（AI变式·先做再看）</summary>';
+        va.forEach(function(v,i){
+          var d=document.createElement('details');
+          d.style.cssText='margin:4px 10px;border:1px solid #d1fae5;border-radius:8px';
+          d.innerHTML='<summary style="padding:5px 10px;cursor:pointer;font-size:12px;color:#065f46">变式'+(i+1)+' · '+v.at+'</summary><div style="padding:6px 10px;font-size:12.5px;color:#334155;white-space:pre-wrap">'+v.q.replace(/</g,'&lt;')+'</div>';
+          vd.appendChild(d);
+        });
+        box.appendChild(vd);
+      }
+    }catch(e){}
     ov.querySelector('#fnum').textContent=(cur+1)+' / '+list.length;
     var ai=document.getElementById('fai');
     if(ai) ai.querySelector('.curpg').textContent=pgOf(c);
@@ -1340,7 +1374,24 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
         fetch(AI_BASE+'/api/qa',{method:'POST',headers:{'Content-Type':'application/json'},
           body:JSON.stringify({subject:subjectOf(c2),question:ctx2+'\n【要求】请基于本题考点编一道同类变式题（换数字或换情境），给出：变式题目、答案、三步简要解析。开头写【变式练习·AI生成，答案供参考】'})})
           .then(function(r){return r.json().then(function(j){return r.ok?j:Promise.reject(j.error)})})
-          .then(function(j){wait2.textContent=j.answer})
+          .then(function(j){
+            wait2.textContent=j.answer;
+            var sv=document.createElement('button');
+            sv.textContent='💾 存为对症练';
+            sv.style.cssText='margin-top:4px;font-size:12px;color:#059669;background:#ecfdf5;border:1px solid #a7f3d0;border-radius:8px;padding:3px 10px;cursor:pointer';
+            sv.onclick=function(){
+              try{
+                var key='fxv_'+pgOf(c2);
+                var arr=JSON.parse(localStorage.getItem(key)||'[]');
+                arr.push({q:j.answer.slice(0,600),at:new Date().toISOString().slice(0,10)});
+                if(arr.length>5)arr=arr.slice(-5);
+                localStorage.setItem(key,JSON.stringify(arr));
+                sv.textContent='✅ 已存(重做本题时可见)';
+                sv.disabled=true;
+              }catch(e){}
+            };
+            wait2.parentElement.insertBefore(sv,wait2.nextSibling);
+          })
           .catch(function(e){wait2.className='fmsg err';wait2.textContent='失败：'+e});
         return;
       }
@@ -1385,7 +1436,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     var chips='<button class="fsub on" data-s="">全部('+all.length+')</button>';
     if(hasMath)chips+='<button class="fsub" data-s="数学">📐数学('+subs.filter(function(s){return s==='数学'}).length+')</button>';
     if(hasPhys)chips+='<button class="fsub" data-s="物理">🔬物理('+subs.filter(function(s){return s==='物理'}).length+')</button>';
-    ov.innerHTML='<div id="fbar">'+chips+'<button data-a="p">←</button><b id="fnum"></b><button data-a="n">→</button>'+
+    ov.innerHTML='<div id="fbar">'+chips+'<button data-a="p">←</button><b id="fnum"></b><span id="fstreak" style="color:#ea580c;font-size:12px;min-width:100px"></span><button data-a="n">→</button>'+
       '<input id="fsearch" placeholder="🔍 搜题号/关键词">'+
       '<span id="fscount"></span><button data-a="ai">🤖 AI详解</button><button data-a="x">✕ 退出</button>'+
       '<div id="fdrop"></div></div><div id="fq"></div>';
