@@ -8,7 +8,9 @@
 /* 外层锁定不可滚动(100vh+overflow hidden+flex列)：导航只有一种绘制位置，
    杜绝webview在iframe内滚动/锚点切换时sticky导航的重绘残影(双标题栏) */
 body{margin:0;font-family:"Microsoft YaHei",sans-serif;background:#eef1f7;height:100vh;overflow:hidden;display:flex;flex-direction:column;}
-.tabs{flex:none;display:flex;gap:0;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+/* translateZ(0)=独立合成层: 部分手机webview(TBS/X5内核)对普通元素也会在iframe滚动时留下重绘残影,
+   独立图层由GPU整层上屏, 不可能再叠印出第二份 */
+.tabs{flex:none;display:flex;gap:0;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);transform:translateZ(0);}
 .tabs a{flex:1;text-align:center;padding:13px 0;font-size:15px;font-weight:bold;text-decoration:none;color:#64748b;border-bottom:3px solid transparent;}
 .tabs a[href="#tab-week"]{color:#2563eb;}
 .tabs a[href="#tab-kp"]{color:#0d9488;}
