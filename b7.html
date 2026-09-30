@@ -1471,18 +1471,70 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
   };
   $('fxClose').onclick=function(){$('fixOv').classList.remove('on')};
   $('fixOv').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on')});
-  function bind(box,setter){
+  var qImgs=[]; // 题图多张叠加
+  function bindMulti(box,key){
     box.tabIndex=0;
     box.addEventListener('paste',function(e){
       var it=[].slice.call(e.clipboardData.items).find(function(i){return i.type.indexOf('image/')===0});
       if(!it)return; e.preventDefault();
       var f=it.getAsFile(); if(!f)return;
-      var r=new FileReader(); r.onload=function(){setter(r.result);box.innerHTML='<img src="'+r.result+'">'}; r.readAsDataURL(f);
+      var r=new FileReader();
+      r.onload=function(){
+        (key==='q'?qImgs:[a]).push(r.result);
+        renderMulti(box,key);
+      };
+      r.readAsDataURL(f);
     });
-    box.addEventListener('click',function(){if(this.querySelector('img')){setter('');this.innerHTML='粘贴区'}});
+    box.addEventListener('click',function(e){
+      if(e.target.dataset.del!==undefined){
+        (key==='q'?qImgs:[a]).splice(parseInt(e.target.dataset.del),1);
+        renderMulti(box,key);
+        return;
+      }
+      if(e.target===box&&(key==='q'?qImgs:[a]).length){
+        if(key==='q')qImgs=[];else a='';
+        renderMulti(box,key);
+      }
+    });
   }
-  bind($('fxQbox'),function(v){q=v});
-  bind($('fxAbox'),function(v){a=v});
+  function renderMulti(box,key){
+    var arr=key==='q'?qImgs:(a?[a]:[]);
+    if(!arr.length){box.innerHTML='粘贴区(Ctrl+V,可粘多张自动竖拼)';return}
+    var h='<div style="font-size:11px;color:#64748b;padding:2px 6px">'+arr.length+'张'+(key==='q'?' ← 点空白清除':'')+'</div>';
+    arr.forEach(function(src,i){
+      h+='<div style="position:relative;margin:2px 0;border:1px solid #334155;border-radius:6px;overflow:hidden">';
+      h+='<img src="'+src+'" style="max-width:100%;max-height:180px;display:block">';
+      h+='<button data-del="'+i+'" style="position:absolute;top:3px;right:3px;background:#ef4444;color:#fff;border:0;border-radius:4px;padding:1px 6px;font-size:11px;cursor:pointer">×</button>';
+      h+='</div>';
+    });
+    box.innerHTML=h;
+  }
+  // 多图竖拼为一张
+  function mergeImages(dataUrls,cb){
+    var imgs=[],loaded=0;
+    dataUrls.forEach(function(u,i){
+      var im=new Image();
+      im.onload=function(){imgs[i]=im;if(++loaded===dataUrls.length){
+        var maxW=Math.max.apply(null,imgs.map(function(x){return x.width}));
+        var totalH=imgs.reduce(function(s,x){return s+x.height+8},0);
+        var cv=document.createElement('canvas');
+        cv.width=maxW;cv.height=totalH;
+        var ctx=cv.getContext('2d');
+        ctx.fillStyle='#fff';ctx.fillRect(0,0,maxW,totalH);
+        var y=0;
+        imgs.forEach(function(x){
+          ctx.drawImage(x,Math.floor((maxW-x.width)/2),y);
+          y+=x.height+8;
+        });
+        cb(cv.toDataURL('image/jpeg',0.9));
+      }};
+      im.src=u;
+    });
+  }
+  bindMulti($('fxQbox'),'q');
+  bindMulti($('fxAbox'),'a');
+  // 旧接口兼容
+  var q='',a='';
   var SYM='∠ △ ∽ ≌ ⊥ ∥ ± × ÷ ≠ ≤ ≥ ² ³ √ π ° ∵ ∴ ≈ α β θ'.split(' ');
   SYM.forEach(function(s){
     var b=document.createElement('button');b.className='fxsym';b.textContent=s;
@@ -1502,7 +1554,16 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
   $('fxSave').onclick=function(){
     var pg=parseInt($('fxPg').value,10),qd=$('fxQid').value.replace(/\D/g,'');
     var body={action:'save',page:pg,qid:qd,stem:$('fxStem').value};
-    if(q)body.qimg=q; if(a)body.ansimg=a;
+    if(a)body.ansimg=a;
+    if(qImgs.length===1)body.qimg=qImgs[0];
+    else if(qImgs.length>1){
+      msg('拼接'+qImgs.length+'张图…');
+      mergeImages(qImgs,function(merged){body.qimg=merged;doSave(body)});
+      return;
+    }
+    doSave(body);
+    return;
+    function doSave(body){
     msg('保存中…');var self=this;self.disabled=true;
     fetch(BASE+'/api/manual',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
       .then(function(r){return r.json().then(function(j){return r.ok?j:Promise.reject(j.error)})})
