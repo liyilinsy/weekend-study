@@ -2043,15 +2043,17 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
   };
   $('fxBuild').onclick=function(){
     msg('重建启动…');$('fixLog').style.display='block';$('fixLog').textContent='启动中…';
-    var self=this;self.disabled=true;
+    var self=this;self.disabled=true;var pollMiss=0;
     fetch(BASE+'/api/manual',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'rebuild'})})
       .then(function(){return poll()})
       .catch(function(e){msg('启动失败：'+e);self.disabled=false});
     function poll(){
       fetch(BASE+'/api/manual').then(function(r){return r.json()}).then(function(j){
         $('fixLog').textContent=j.log||'…';
-        if(j.running){setTimeout(poll,3000)}
-        else{self.disabled=false;msg(j.log&&j.log.indexOf('DONE')>=0?'✅ 重建发布完成':'⚠️ 中断，看日志',(j.log||'').indexOf('DONE')>=0)}
+        if(j.running){pollMiss=0;setTimeout(poll,3000)}
+        else if(j.log&&j.log.indexOf('DONE')>=0){self.disabled=false;msg('✅ 重建发布完成，等2分钟CDN缓存后刷新看效果',1)}
+        else if(++pollMiss<4){setTimeout(poll,4000)}
+        else{self.disabled=false;msg('部署可能仍在进行(大文件上传2-3分钟)，等2分钟后刷新查看效果')}
       }).catch(function(){setTimeout(poll,4000)});
     }
   };
