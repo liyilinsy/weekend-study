@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="UTF-8"><title>天然学习台</title>
 <script>/* 带锚点跳转(纯JS): meta-refresh在部分浏览器不继承#tab-xxx且与脚本竞态; 显式拼接hash保tab状态。
-   v参数=缓存击穿: 云加速/浏览器可能把修复双标题栏前的旧x7.html缓存住, 每次发版更新此参数强制拉新 */
-location.replace('x7.html?v=20260930'+(location.hash||''));
+   v参数=缓存击穿, 仅http(s)需要: 云加速/浏览器可能缓存修复双标题栏前的旧x7.html。
+   file://协议绝不能带?参数——Chromium系会把'?v=...'当文件名一部分直接ERR_FILE_NOT_FOUND */
+(function(){
+  var v = /^https?:$/.test(location.protocol) ? '?v=20260930' : '';
+  location.replace('x7.html' + v + (location.hash || ''));
+})();
 </script>
-</head><body><p>加载中…如未跳转<a href="x7.html?v=20260930">点这里</a></p></body></html>
+</head><body><p>加载中…如未跳转<a href="x7.html">点这里</a></p></body></html>
