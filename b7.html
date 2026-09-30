@@ -1570,6 +1570,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
       .then(function(j){msg('✅ '+j.msg,1)})
       .catch(function(e){msg('❌ '+e)})
       .finally(function(){self.disabled=false});
+    }
   };
   $('fxBuild').onclick=function(){
     msg('重建启动…');$('fixLog').style.display='block';$('fixLog').textContent='启动中…';
