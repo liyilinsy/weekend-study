@@ -1543,9 +1543,9 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
   });
   function msg(t,ok){$('fxMsg').textContent=t;$('fxMsg').style.color=ok?'#34d399':'#f87171'}
   $('fxOcr').onclick=function(){
-    if(!q)return msg('先粘贴题图');
+    if(!qImgs.length)return msg('先粘贴题图');
     msg('OCR中…');var self=this;self.disabled=true;
-    fetch(BASE+'/api/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:q})})
+    fetch(BASE+'/api/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:qImgs[qImgs.length-1]})})
       .then(function(r){return r.json().then(function(j){return r.ok?j:Promise.reject(j.error)})})
       .then(function(j){$('fxStem').value=(j.transcription||'').trim();msg('OCR完成，请核对',1)})
       .catch(function(e){msg('OCR失败：'+e+'（学习工具启动了吗？）')})
