@@ -1505,7 +1505,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     }
   });
 })();
-</script><!-- fixtool-v4: 修题浮窗(多图+阶段提示+自动刷新+OCR兜底降质提示) -->
+</script><!-- fixtool-v5: 修题浮窗(多图+阶段提示+自动刷新+PaddleOCR) -->
 <style>
 #fixBtn{position:fixed;left:14px;bottom:14px;z-index:999;background:#3f1d0f;color:#fdba74;border:1px solid #7c2d12;border-radius:20px;padding:8px 16px;font-size:13px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 #fixOv{position:fixed;inset:0;z-index:1001;background:rgba(3,7,18,.6);display:none;align-items:center;justify-content:center}
@@ -1637,7 +1637,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     msg('OCR中…');var self=this;self.disabled=true;
     fetch(BASE+'/api/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:qImgs[qImgs.length-1]})})
       .then(function(r){return r.json().then(function(j){return r.ok?j:Promise.reject(j.error)})})
-      .then(function(j){$('fxStem').value=(j.transcription||'').trim();msg(j.fallback?'⚠ 本地OCR兜底(视觉通道故障),几何符号易错请仔细核对':'OCR完成，请核对',1)})
+      .then(function(j){$('fxStem').value=(j.transcription||'').trim();msg(j.fallback?'✅ OCR完成(Paddle本地引擎·约10秒)，请核对题干':'OCR完成，请核对',1)})
       .catch(function(e){msg('OCR失败：'+e+'（学习工具启动了吗？）')})
       .finally(function(){self.disabled=false});
   };
