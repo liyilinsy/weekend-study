@@ -2045,7 +2045,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     show(cur);
   };
 })();
-</script><!-- fixtool-v5: 修题浮窗(多图+阶段提示+自动刷新+PaddleOCR) -->
+</script><!-- fixtool-v6: 修题浮窗(多图+阶段提示+自动刷新+PaddleOCR+题号切片+题干带入) -->
 <style>
 #fixBtn{position:fixed;left:14px;bottom:14px;z-index:999;background:#3f1d0f;color:#fdba74;border:1px solid #7c2d12;border-radius:20px;padding:8px 16px;font-size:13px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 #fixOv{position:fixed;inset:0;z-index:1001;background:rgba(3,7,18,.6);display:none;align-items:center;justify-content:center}
@@ -2073,6 +2073,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
 </div>
 <div style="margin-bottom:6px">
   <button id="fxOcr" style="background:#0d9488">🔍 OCR 题干</button>
+  <button id="fxLoad" style="background:#1d4ed8">📋 带入题库题干</button>
   <span id="fxMsg" style="margin-left:8px;color:#94a3b8"></span>
 </div>
 <div id="fxSyms" style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px"></div>
@@ -2097,7 +2098,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     if(pg&&!$('fxPg').value){var m=pg.textContent.match(/p(\d+)·(\d+)/);if(m){$('fxPg').value=m[1];$('fxQid').value=m[2];
       // 顺带识别科目: 找原文卡(非克隆), 沿details父链找含"物理"的章节标题
       var src=[].slice.call(document.querySelectorAll('.pg')).find(function(el){return el.textContent.indexOf(m[0])>=0});
-      if(src){var d=src.closest('details');while(d){var sm=d.querySelector('summary');if(sm&&/物理/.test(sm.textContent)){$('fxSubj').value='物理';break}d=d.parentElement?d.parentElement.closest('details'):null}}}}
+      if(src){var d=src.closest('details');while(d){var sm=d.querySelector('summary');if(sm&&/物理/.test(sm.textContent)){$('fxSubj').value='物理';break}d=d.parentElement?d.parentElement.closest('details'):null}}setTimeout(function(){prefillStem(false)},80)}}
   };
   $('fxClose').onclick=function(){$('fixOv').classList.remove('on')};
   $('fixOv').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on')});
@@ -2172,12 +2173,47 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     $('fxSyms').appendChild(b);
   });
   function msg(t,ok){$('fxMsg').textContent=t;$('fxMsg').style.color=ok?'#34d399':'#f87171'}
+  // 按题号从OCR全文切出本题: 从'01.'行到下一题号行(图形噪声行已在引擎侧过滤)
+  function sliceQ(t){
+    var qd=$('fxQid').value.replace(/\D/g,'');
+    if(!qd||!t)return t;
+    var qn=parseInt(qd,10),lines=t.split('\n'),start=-1,end=lines.length;
+    for(var i=0;i<lines.length;i++){
+      var m=lines[i].match(/^(\d{1,2})[．.、]/);
+      if(!m)continue;
+      var n=parseInt(m[1],10);
+      if(n===qn){if(start<0)start=i}
+      else if(start>=0&&n>qn&&n<=qn+3){end=i;break}
+    }
+    return start>=0?lines.slice(start,end).join('\n'):t;
+  }
+  // 带入题库现有题干: 按题号在页面上找到题卡, 取其stem(题干多数时候本来就有, 无需OCR)
+  function prefillStem(force){
+    var bk=$('fxPg').value.replace(/\D/g,''),qd=$('fxQid').value.replace(/\D/g,'');
+    if(!bk||!qd)return;
+    var q2=qd.length<2?'0'+qd:qd;
+    var want='p'+bk+'·'+q2;
+    var el=[].slice.call(document.querySelectorAll('.pg')).filter(function(e){return e.textContent.trim()===want})[0];
+    if(!el){msg('页面上没找到'+want+'的题卡(锚点页码范围对吗?)');return}
+    var card=el.closest('.q');
+    var st=card&&(card.querySelector('.stem')||card.querySelector('.brief'));
+    if(!st){msg('该题卡没有题干文字');return}
+    if(!force&&$('fxStem').value.trim())return;
+    $('fxStem').value=st.textContent.trim();
+    msg('已带入题库现有题干，可直接改或点OCR覆盖',1);
+  }
+  $('fxLoad').onclick=function(){prefillStem(true)};
+  $('fxPg').addEventListener('change',function(){prefillStem(false)});
+  $('fxQid').addEventListener('change',function(){prefillStem(false)});
   $('fxOcr').onclick=function(){
     if(!qImgs.length)return msg('先粘贴题图');
     msg('OCR中…');var self=this;self.disabled=true;
     fetch(BASE+'/api/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:qImgs[qImgs.length-1]})})
       .then(function(r){return r.json().then(function(j){return r.ok?j:Promise.reject(j.error)})})
-      .then(function(j){$('fxStem').value=(j.transcription||'').trim();msg(j.fallback?'✅ OCR完成(Paddle本地引擎·约10秒)，请核对题干':'OCR完成，请核对',1)})
+      .then(function(j){
+        var t=sliceQ((j.transcription||'').trim());
+        if(t.replace(/\s/g,'').length<8){msg('⚠ 这张图里没认出题干文字(可能截的只是图形)——可点「📋带入题库题干」或手输');return}
+        $('fxStem').value=t;msg(j.fallback?'✅ OCR完成·已按题号切出本题(Paddle引擎)，请核对':'OCR完成，请核对',1)})
       .catch(function(e){msg('OCR失败：'+e+'（学习工具启动了吗？）')})
       .finally(function(){self.disabled=false});
   };
