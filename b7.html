@@ -1507,7 +1507,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     }
   });
 })();
-</script><!-- fixtool-v8: 修题浮窗(多图合并OCR+切片+带入+阶段+刷新+失败回滚提示) -->
+</script><!-- fixtool-v9: 修题浮窗(多图合并OCR+切片+带入+阶段+刷新+回滚+409自动跟进度) -->
 <style>
 #fixBtn{position:fixed;left:14px;bottom:14px;z-index:999;background:#3f1d0f;color:#fdba74;border:1px solid #7c2d12;border-radius:20px;padding:8px 16px;font-size:13px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 #fixOv{position:fixed;inset:0;z-index:1001;background:rgba(3,7,18,.6);display:none;align-items:center;justify-content:center}
@@ -1709,7 +1709,9 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     fetch(BASE+'/api/manual',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'rebuild'})})
       .then(function(r){return r.json().then(function(j){if(!r.ok)throw (j&&j.error)||'启动失败';return j})})
       .then(function(){return poll()})
-      .catch(function(e){msg('启动失败：'+e);self.disabled=false});
+      .catch(function(e){
+        if(String(e).indexOf('已有重建')>=0){msg('已有重建正在跑，直接跟进它的进度↓',1);t0=Date.now();poll();return}
+        msg('启动失败：'+e);self.disabled=false});
     function stageTxt(log){var t='启动…';stages.forEach(function(s){if(log.indexOf(s[0])>=0)t=s[1]});return t}
     function poll(){
       fetch(BASE+'/api/manual').then(function(r){return r.json()}).then(function(j){
