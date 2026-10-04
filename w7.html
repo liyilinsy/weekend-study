@@ -2045,7 +2045,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     show(cur);
   };
 })();
-</script><!-- fixtool-v12: 修题浮窗(题干checkbox显式更新+快速发布+闭环提示+多图OCR) -->
+</script><!-- fixtool-v13: 修题浮窗(修复解析图粘贴丢失+题干checkbox+快速发布+闭环) -->
 <style>
 #fixBtn{position:fixed;left:14px;bottom:14px;z-index:999;background:#3f1d0f;color:#fdba74;border:1px solid #7c2d12;border-radius:20px;padding:8px 16px;font-size:13px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 #fixOv{position:fixed;inset:0;z-index:1001;background:rgba(3,7,18,.6);display:none;align-items:center;justify-content:center}
@@ -2113,18 +2113,18 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
       var f=it.getAsFile(); if(!f)return;
       var r=new FileReader();
       r.onload=function(){
-        (key==='q'?qImgs:[a]).push(r.result);
+        if(key==='q')qImgs.push(r.result);else a=r.result;  // 修复: 原三元给临时数组push, 解析图粘贴静默丢失
         renderMulti(box,key);
       };
       r.readAsDataURL(f);
     });
     box.addEventListener('click',function(e){
       if(e.target.dataset.del!==undefined){
-        (key==='q'?qImgs:[a]).splice(parseInt(e.target.dataset.del),1);
+        if(key==='q')qImgs.splice(parseInt(e.target.dataset.del),1);else a='';
         renderMulti(box,key);
         return;
       }
-      if(e.target===box&&(key==='q'?qImgs:[a]).length){
+      if(e.target===box&&(key==='q'?qImgs.length:a)){
         if(key==='q')qImgs=[];else a='';
         renderMulti(box,key);
       }
