@@ -2045,7 +2045,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     show(cur);
   };
 })();
-</script><!-- fixtool-v13: 修题浮窗(修复解析图粘贴丢失+题干checkbox+快速发布+闭环) -->
+</script><!-- fixtool-v14: 修题浮窗(修复解析图粘贴+保存按钮防双击+题干checkbox+快速发布) -->
 <style>
 #fixBtn{position:fixed;left:14px;bottom:14px;z-index:999;background:#3f1d0f;color:#fdba74;border:1px solid #7c2d12;border-radius:20px;padding:8px 16px;font-size:13px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 #fixOv{position:fixed;inset:0;z-index:1001;background:rgba(3,7,18,.6);display:none;align-items:center;justify-content:center}
@@ -2234,7 +2234,7 @@ footer{text-align:center;color:#999;font-size:12px;padding:16px;}</style></head>
     doSave(body);
     return;
     function doSave(body){
-    msg('保存中…');var self=this;self.disabled=true;
+    msg('保存中…');var self=$('fxSave');self.disabled=true;  // ocr#20: 原this=window, 保存按钮从不禁用可双击重复保存
     fetch(BASE+'/api/manual',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
       .then(function(r){return r.json().then(function(j){return r.ok?j:Promise.reject(j.error)})})
       .then(function(j){msg('✅ p'+$('fxPg').value+'·'+$('fxQid').value+' '+j.msg,1)})
